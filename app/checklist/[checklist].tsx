@@ -1,12 +1,20 @@
+import ChecklistItem from "@/components/ChecklistItem";
 import { useLocalSearchParams } from "expo-router";
-import { Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Checklist() {
   const { checklist } = useLocalSearchParams();
   return (
-    <SafeAreaView>
-      <Text>{checklist}</Text>
+    <SafeAreaView style={styles.page}>
+      <ChecklistItem />
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+    alignItems: "center",
+  },
+});
