@@ -5,6 +5,7 @@ export type Checklist = {
 
 export type ChecklistEntry = {
   id: string;
+  status: boolean;
   title: string;
   required: boolean;
   childOf: ChecklistEntry | undefined;
