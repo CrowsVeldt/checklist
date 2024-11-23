@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { Pressable, StyleSheet, Text } from "react-native";
 
 export default function AddButton() {
@@ -6,6 +7,7 @@ export default function AddButton() {
       style={({ pressed }) =>
         pressed ? [styles.button, styles.buttonPressed] : styles.button
       }
+      onPress={() => router.push("/create")}
     >
       <Text style={styles.buttonText}>+</Text>
     </Pressable>
