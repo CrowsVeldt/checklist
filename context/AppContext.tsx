@@ -11,7 +11,20 @@ export const AppContext = createContext<AppContextType>(
 
 const AppProvider = ({ children }: { children: any }) => {
   const [lists, setLists] = useState<Checklist[]>([
-    { id: "123abc", title: "default checklist", items: [] },
+    {
+      id: "123abc",
+      title: "default checklist",
+      items: [
+        {
+          id: "456def",
+          status: false,
+          title: "item 1",
+          required: true,
+          childOf: undefined,
+          parentTo: undefined,
+        },
+      ],
+    },
   ]);
 
   const getLists = () => lists;
