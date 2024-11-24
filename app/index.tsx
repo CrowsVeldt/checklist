@@ -1,5 +1,8 @@
 import AddButton from "@/components/AddButton";
+import { AppContext } from "@/context/AppContext";
+import { Checklist } from "@/types";
 import { Link } from "expo-router";
+import { ContextType, useContext } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -13,16 +16,23 @@ import { SafeAreaView } from "react-native-safe-area-context";
 */
 
 export default function Index() {
+  const { getLists }: ContextType<typeof AppContext> = useContext(AppContext);
+  const lists: Checklist[] = getLists();
   return (
     <SafeAreaView style={styles.mainView}>
-      <Link
-        href={{
-          pathname: "/checklist/[checklist]",
-          params: { checklist: "test" },
-        }}
-      >
-        Checklist
-      </Link>
+      {lists &&
+        lists.map((item, index) => {
+          return (
+            <Link
+              href={{
+                pathname: "/checklist/[checklist]",
+                params: { checklist: item.title },
+              }}
+            >
+              {item.title}
+            </Link>
+          );
+        })}
       <AddButton />
     </SafeAreaView>
   );
