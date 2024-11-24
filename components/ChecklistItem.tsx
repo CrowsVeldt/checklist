@@ -2,7 +2,7 @@ import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function () {
+export default function ({ title }: { title: string }) {
   const [checked, setChecked] = useState<boolean>(false);
   return (
     <View
@@ -18,7 +18,7 @@ export default function () {
           checked ? [styles.itemCheckedText, styles.itemText] : styles.itemText
         }
       >
-        Item 1
+        {title}
       </Text>
     </View>
   );
