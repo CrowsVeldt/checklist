@@ -1,3 +1,4 @@
+import ListEntryInput from "@/components/ListEntryInput";
 import { useState } from "react";
 import {
   Pressable,
@@ -28,14 +29,19 @@ export default function CreateChecklist() {
           onChangeText={setTitle}
         />
       </View>
-      <Pressable
-        style={({ pressed }) =>
-          pressed ? [styles.button, styles.buttonPressed] : styles.button
-        }
-        onPress={() => console.log("shit")}
-      >
-        <Text>Create</Text>
-      </Pressable>
+      <View>
+        <ListEntryInput />
+      </View>
+      <View>
+        <Pressable
+          style={({ pressed }) =>
+            pressed ? [styles.button, styles.buttonPressed] : styles.button
+          }
+          onPress={() => console.log("shit")}
+        >
+          <Text>Create</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 }

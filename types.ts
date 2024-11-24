@@ -1,6 +1,7 @@
 export type Checklist = {
   id: string;
-  items: ChecklistEntry[];
+  title: string;
+  items: ChecklistEntry[] | [];
 };
 
 export type ChecklistEntry = {
