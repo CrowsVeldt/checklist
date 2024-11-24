@@ -7,7 +7,7 @@ export default function Checklist() {
   const { checklist } = useLocalSearchParams();
   return (
     <SafeAreaView style={styles.page}>
-      <ChecklistItem />
+      <ChecklistItem title={checklist} />
     </SafeAreaView>
   );
 }
