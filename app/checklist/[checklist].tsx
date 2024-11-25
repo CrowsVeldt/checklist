@@ -3,6 +3,13 @@ import { useLocalSearchParams } from "expo-router";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+/* 
+  Screen components:
+    - Checklist title
+    - Checklist entries
+    - Checklist settings?
+*/
+
 export default function Checklist() {
   const { checklist } = useLocalSearchParams();
   return (
