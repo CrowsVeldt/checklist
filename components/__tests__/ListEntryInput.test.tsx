@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react-native";
-import ListEntryInput from "../ListEntryInput";
+import ListEntryInput from "../ChecklistEntryInput";
 
 describe("<ListEntryInput />", () => {
   test("ListEntryInput renders correctly", () => {

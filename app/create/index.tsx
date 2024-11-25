@@ -1,4 +1,4 @@
-import ListEntryInput from "@/components/ListEntryInput";
+import ChecklistEntryInput from "@/components/ChecklistEntryInput";
 import { useState } from "react";
 import {
   Pressable,
@@ -30,7 +30,7 @@ export default function CreateChecklist() {
         />
       </View>
       <View>
-        <ListEntryInput />
+        <ChecklistEntryInput />
       </View>
       <View>
         <Pressable

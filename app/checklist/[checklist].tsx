@@ -1,4 +1,4 @@
-import ChecklistItem from "@/components/ChecklistItem";
+import ChecklistItem from "@/components/ChecklistEntry";
 import { useLocalSearchParams } from "expo-router";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
