@@ -1,14 +1,14 @@
-export type Checklist = {
+export type ChecklistType = {
   id: string;
   title: string;
-  items: ChecklistEntry[] | [];
+  entries: ChecklistEntryType[] | [];
 };
 
-export type ChecklistEntry = {
+export type ChecklistEntryType = {
   id: string;
   status: boolean;
   title: string;
   required: boolean;
-  childOf: ChecklistEntry | undefined;
-  parentTo: ChecklistEntry | ChecklistEntry[] | undefined;
+  childOf: ChecklistEntryType | undefined;
+  parentTo: ChecklistEntryType | ChecklistEntryType[] | undefined;
 };
