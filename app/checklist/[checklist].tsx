@@ -21,9 +21,10 @@ export default function Checklist() {
   return (
     <SafeAreaView style={styles.page}>
       <Text>{list!.title}</Text>
-      {list!.entries.map((entry) => (
-        <ChecklistItem title={entry.title} key={entry.id} />
-      ))}
+      {list &&
+        list.entries.map((entry) => (
+          <ChecklistItem title={entry.title} key={entry.id} />
+        ))}
     </SafeAreaView>
   );
 }
