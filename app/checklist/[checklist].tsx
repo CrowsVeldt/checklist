@@ -1,6 +1,9 @@
 import ChecklistItem from "@/components/ChecklistEntry";
+import { AppContext } from "@/context/AppContext";
+import { ChecklistType } from "@/types";
 import { useLocalSearchParams } from "expo-router";
-import { StyleSheet } from "react-native";
+import { ContextType, useContext } from "react";
+import { StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 /* 
@@ -11,10 +14,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 */
 
 export default function Checklist() {
-  const { checklist } = useLocalSearchParams();
+  const { getListById }: ContextType<typeof AppContext> =
+    useContext(AppContext);
+  const { checklist }: { checklist: string } = useLocalSearchParams();
+  const list: ChecklistType | undefined = getListById(checklist);
   return (
     <SafeAreaView style={styles.page}>
-      <ChecklistItem title={checklist} />
+      <Text>{list!.title}</Text>
+      {list!.entries.map((entry) => (
+        <ChecklistItem title={entry.title} key={entry.id} />
+      ))}
     </SafeAreaView>
   );
 }

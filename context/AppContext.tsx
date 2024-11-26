@@ -1,8 +1,9 @@
-import { Checklist } from "@/types";
+import { ChecklistType } from "@/types";
 import React, { createContext, useState, useEffect } from "react";
 
 type AppContextType = {
-  getLists: () => Checklist[];
+  getLists: () => ChecklistType[];
+  getListById: (id: string) => ChecklistType | undefined;
 };
 
 export const AppContext = createContext<AppContextType>(
@@ -10,13 +11,35 @@ export const AppContext = createContext<AppContextType>(
 );
 
 const AppProvider = ({ children }: { children: any }) => {
-  const [lists, setLists] = useState<Checklist[]>([
+  const [lists, setLists] = useState<ChecklistType[]>([
     {
       id: "123abc",
       title: "default checklist",
-      items: [
+      entries: [
         {
           id: "456def",
+          status: false,
+          title: "item 1",
+          required: true,
+          childOf: undefined,
+          parentTo: undefined,
+        },
+        {
+          id: "789ghi",
+          status: false,
+          title: "item 2",
+          required: true,
+          childOf: undefined,
+          parentTo: undefined,
+        },
+      ],
+    },
+    {
+      id: "890xyz",
+      title: "default checklist 2",
+      entries: [
+        {
+          id: "567uvw",
           status: false,
           title: "item 1",
           required: true,
@@ -28,8 +51,9 @@ const AppProvider = ({ children }: { children: any }) => {
   ]);
 
   const getLists = () => lists;
+  const getListById = (id: string) => lists.find((item) => item.id === id);
 
-  const value = { getLists };
+  const value = { getLists, getListById };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
