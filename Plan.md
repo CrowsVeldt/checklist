@@ -6,7 +6,7 @@
     EditList?
 
 # Components: 
-    ChecklistItem
+    ChecklistEntry
     AddButton
     ChecklistEntryInput
 
