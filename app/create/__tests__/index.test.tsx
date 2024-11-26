@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react-native";
-import CreateChecklist from "..";
+import CreateChecklist from "../index";
 
 describe("<CreateChecklist />", () => {
   test("Index renders correctly", () => {

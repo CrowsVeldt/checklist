@@ -3,7 +3,7 @@ import { AppContext } from "@/context/AppContext";
 import { ChecklistType } from "@/types";
 import { Link } from "expo-router";
 import { ContextType, useContext } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 /* 
@@ -29,7 +29,7 @@ export default function Index() {
                 params: { checklist: list.id },
               }}
             >
-              {list.title}
+              <Text>{list.title}</Text>
             </Link>
           );
         })}
@@ -41,7 +41,6 @@ export default function Index() {
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
   },
 });
