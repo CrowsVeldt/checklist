@@ -1,4 +1,5 @@
 import AddButton from "@/components/AddButton";
+import ChecklistLink from "@/components/ChecklistLink";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistType } from "@/types";
 import { Link } from "expo-router";
@@ -22,16 +23,7 @@ export default function Index() {
     <SafeAreaView style={styles.mainView}>
       {lists &&
         lists.map((list, index) => {
-          return (
-            <Link
-              href={{
-                pathname: "/checklist/[checklist]",
-                params: { checklist: list.id },
-              }}
-            >
-              <Text>{list.title}</Text>
-            </Link>
-          );
+          return <ChecklistLink list={list} />;
         })}
       <AddButton />
     </SafeAreaView>
