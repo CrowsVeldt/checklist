@@ -2,8 +2,14 @@ import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-export default function ListEntryInput() {
-  const [title, setTitle] = useState<string>("Entry Title");
+export default function ListEntryInput({
+  initialTitle,
+}: {
+  initialTitle: string;
+}) {
+  const [title, setTitle] = useState<string>(
+    initialTitle != null ? initialTitle : "Entry Title"
+  );
   const [required, setRequired] = useState<boolean>(false);
 
   return (
@@ -27,7 +33,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     padding: 10,
-    width: "70%"
+    width: "70%",
   },
   requiredWrapper: {
     alignItems: "center",

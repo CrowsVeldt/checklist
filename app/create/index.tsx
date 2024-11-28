@@ -23,38 +23,23 @@ import {
 export default function CreateChecklist() {
   const [title, setTitle] = useState<string>("Title");
   const [update, setUpdate] = useState<boolean>(false);
-  // const [newList, setNewList] = useState<ChecklistType>({
-  // id: randomUUID(),
-  // title,
-  // entries: [],
-  // });
   const [entries, setEntries] = useState<ChecklistEntryType[]>([
     {
       id: randomUUID(),
       status: false,
-      title: "Entry Title",
+      title: "Item 1",
       required: false,
-      childOf: undefined,
-      parentTo: undefined,
+      parentTo: [
+        {
+          id: randomUUID(),
+          status: false,
+          title: "Item 1b",
+          required: false,
+          parentTo: [],
+        },
+      ],
     },
   ]);
-
-  // useEffect(() => {
-  // const defaultList: ChecklistType = {
-  // title,
-  // id: randomUUID(),
-  // entries: [
-  // {
-  // id: randomUUID(),
-  // status: false,
-  // title: "Entry Title",
-  // required: false,
-  // childOf: undefined,
-  // parentTo: undefined,
-  // },
-  // ],
-  // };
-  // }, []);
 
   return (
     <SafeAreaView style={styles.page}>
@@ -67,8 +52,8 @@ export default function CreateChecklist() {
         />
       </View>
       <View>
-        {entries.map((item, index) => (
-          <ChecklistEntryInput key={index} />
+        {entries.map((item, index) => ( 
+          <ChecklistEntryInput key={index} initialTitle={item.title} />
         ))}
         <Pressable
           style={({ pressed }) =>

@@ -55,7 +55,7 @@ exports[`<CreateChecklist /> Index renders correctly 1`] = `
     >
       <TextInput
         onChangeText={[Function]}
-        value="Entry Title"
+        value="Item 1"
       />
       <View
         style={
@@ -118,6 +118,47 @@ exports[`<CreateChecklist /> Index renders correctly 1`] = `
           }
         />
       </View>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "borderColor": "black",
+          "borderWidth": 1,
+        }
+      }
+    >
+      <Text>
+        +
+      </Text>
     </View>
   </View>
   <View>
