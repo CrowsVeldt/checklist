@@ -52,9 +52,16 @@ export default function CreateChecklist() {
         />
       </View>
       <View>
-        {entries.map((item, index) => ( 
-          <ChecklistEntryInput key={index} initialTitle={item.title} />
-        ))}
+        {entries.map((item, index) => {
+          if (item.parentTo.length > 0) {
+            // return an entry with it's sub-entries as children
+            // <entry>{children.map((item) => sub-entries)}</entry>
+          } else {
+            return (
+              <ChecklistEntryInput key={index} initialTitle={item.title} />
+            );
+          }
+        })}
         <Pressable
           style={({ pressed }) =>
             pressed
