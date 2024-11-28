@@ -1,5 +1,7 @@
 import ChecklistEntryInput from "@/components/ChecklistEntryInput";
-import { useState } from "react";
+import { ChecklistEntryType, ChecklistType } from "@/types";
+import { randomUUID } from "expo-crypto";
+import { useEffect, useState } from "react";
 import {
   Pressable,
   SafeAreaView,
@@ -9,9 +11,7 @@ import {
   View,
 } from "react-native";
 
-export default function CreateChecklist() {
-  const [title, setTitle] = useState<string>("Title");
-  /*
+/*
       Create Screen contains:
         Title input: text
         Entry input: text, required, addChild
@@ -19,6 +19,43 @@ export default function CreateChecklist() {
 
         User should be able to drag and drop items to different parts of the list
      */
+
+export default function CreateChecklist() {
+  const [title, setTitle] = useState<string>("Title");
+  const [update, setUpdate] = useState<boolean>(false);
+  // const [newList, setNewList] = useState<ChecklistType>({
+  // id: randomUUID(),
+  // title,
+  // entries: [],
+  // });
+  const [entries, setEntries] = useState<ChecklistEntryType[]>([
+    {
+      id: randomUUID(),
+      status: false,
+      title: "Entry Title",
+      required: false,
+      childOf: undefined,
+      parentTo: undefined,
+    },
+  ]);
+
+  // useEffect(() => {
+  // const defaultList: ChecklistType = {
+  // title,
+  // id: randomUUID(),
+  // entries: [
+  // {
+  // id: randomUUID(),
+  // status: false,
+  // title: "Entry Title",
+  // required: false,
+  // childOf: undefined,
+  // parentTo: undefined,
+  // },
+  // ],
+  // };
+  // }, []);
+
   return (
     <SafeAreaView style={styles.page}>
       <View style={styles.titleInputWrapper}>
@@ -30,7 +67,9 @@ export default function CreateChecklist() {
         />
       </View>
       <View>
-        <ChecklistEntryInput />
+        {entries.map((item, index) => (
+          <ChecklistEntryInput key={index} />
+        ))}
       </View>
       <View>
         <Pressable

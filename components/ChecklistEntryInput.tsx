@@ -5,6 +5,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 export default function ListEntryInput() {
   const [title, setTitle] = useState<string>("Entry Title");
   const [required, setRequired] = useState<boolean>(false);
+
   return (
     <View style={styles.inputWrapper}>
       <TextInput value={title} onChangeText={setTitle} />
