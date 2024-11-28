@@ -70,6 +70,15 @@ export default function CreateChecklist() {
         {entries.map((item, index) => (
           <ChecklistEntryInput key={index} />
         ))}
+        <Pressable
+          style={({ pressed }) =>
+            pressed
+              ? [styles.addEntryButton, styles.buttonPressed]
+              : styles.addEntryButton
+          }
+        >
+          <Text>+</Text>
+        </Pressable>
       </View>
       <View>
         <Pressable
@@ -113,5 +122,9 @@ const styles = StyleSheet.create({
   },
   buttonPressed: {
     backgroundColor: "lightgray",
+  },
+  addEntryButton: {
+    borderWidth: 1,
+    borderColor: "black",
   },
 });
