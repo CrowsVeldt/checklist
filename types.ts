@@ -9,6 +9,5 @@ export type ChecklistEntryType = {
   status: boolean;
   title: string;
   required: boolean;
-  childOf: ChecklistEntryType | undefined;
-  parentTo: ChecklistEntryType | ChecklistEntryType[] | undefined;
+  parentTo: ChecklistEntryType[];
 };
