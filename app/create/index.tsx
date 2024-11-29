@@ -1,7 +1,7 @@
 import ChecklistEntryInput from "@/components/ChecklistEntryInput";
 import { ChecklistEntryType, ChecklistType } from "@/types";
 import { randomUUID } from "expo-crypto";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Pressable,
   SafeAreaView,
@@ -29,15 +29,7 @@ export default function CreateChecklist() {
       status: false,
       title: "Item 1",
       required: false,
-      parentTo: [
-        {
-          id: randomUUID(),
-          status: false,
-          title: "Item 1b",
-          required: false,
-          parentTo: [],
-        },
-      ],
+      parentTo: [],
     },
   ]);
 
@@ -52,15 +44,44 @@ export default function CreateChecklist() {
         />
       </View>
       <View>
-        {entries.map((item, index) => ( 
-          <ChecklistEntryInput key={index} initialTitle={item.title} />
-        ))}
+        {entries.map((item, index) => {
+          if (item.parentTo.length > 0) {
+            return (
+              <View>
+                <ChecklistEntryInput key={index} initialTitle={item.title} />
+                {item.parentTo.map((item, index) => (
+                  <ChecklistEntryInput
+                    key={index}
+                    initialTitle={item.title}
+                    child={true}
+                  />
+                ))}
+              </View>
+            );
+          } else {
+            return (
+              <ChecklistEntryInput key={index} initialTitle={item.title} />
+            );
+          }
+        })}
         <Pressable
           style={({ pressed }) =>
             pressed
               ? [styles.addEntryButton, styles.buttonPressed]
               : styles.addEntryButton
           }
+          onPress={() => {
+            setEntries([
+              ...entries,
+              {
+                id: randomUUID(),
+                status: false,
+                title: "New item",
+                required: false,
+                parentTo: [],
+              },
+            ]);
+          }}
         >
           <Text>+</Text>
         </Pressable>
