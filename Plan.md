@@ -1,20 +1,26 @@
-# Screens: 
+# Screens:
+
     Main
     Checklist
     Create
     Settings?
     EditList?
 
-# Components: 
+# Components:
+
     AddButton
     ChecklistEntry
     ChecklistEntryInput
     ChecklistLink
 
 # Context:
+
     Checklists list
 
 # Initial state:
+
     On initial startup have a default/example checklist on the main screen
 
 # Notes:
+
+    App should ask for confirmation before adding a new list
