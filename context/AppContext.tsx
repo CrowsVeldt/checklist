@@ -1,4 +1,4 @@
-import { ChecklistType } from "@/types";
+import { ChecklistType } from "@/utils/types";
 import React, { createContext, useState } from "react";
 
 type AppContextType = {

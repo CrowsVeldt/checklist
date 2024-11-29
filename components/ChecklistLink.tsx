@@ -1,4 +1,4 @@
-import { ChecklistType } from "@/types";
+import { ChecklistType } from "@/utils/types";
 import { router } from "expo-router";
 import { Pressable, StyleSheet, Text } from "react-native";
 
