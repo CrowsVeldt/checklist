@@ -1,7 +1,7 @@
 import ChecklistEntryInput from "@/components/ChecklistEntryInput";
 import { ChecklistEntryType, ChecklistType } from "@/types";
 import { randomUUID } from "expo-crypto";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Pressable,
   SafeAreaView,
@@ -29,15 +29,7 @@ export default function CreateChecklist() {
       status: false,
       title: "Item 1",
       required: false,
-      parentTo: [
-        {
-          id: randomUUID(),
-          status: false,
-          title: "Item 1b",
-          required: false,
-          parentTo: [],
-        },
-      ],
+      parentTo: [],
     },
   ]);
 
@@ -78,6 +70,18 @@ export default function CreateChecklist() {
               ? [styles.addEntryButton, styles.buttonPressed]
               : styles.addEntryButton
           }
+          onPress={() => {
+            setEntries([
+              ...entries,
+              {
+                id: randomUUID(),
+                status: false,
+                title: "New item",
+                required: false,
+                parentTo: [],
+              },
+            ]);
+          }}
         >
           <Text>+</Text>
         </Pressable>
