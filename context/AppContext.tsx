@@ -2,6 +2,7 @@ import { ChecklistType } from "@/types";
 import React, { createContext, useState } from "react";
 
 type AppContextType = {
+  addList: (newList: ChecklistType) => void;
   getLists: () => ChecklistType[];
   getListById: (id: string) => ChecklistType | undefined;
 };
@@ -47,10 +48,11 @@ const AppProvider = ({ children }: { children: any }) => {
     },
   ]);
 
+  const addList = (newList: ChecklistType) => setLists([...lists, newList]);
   const getLists = () => lists;
   const getListById = (id: string) => lists.find((item) => item.id === id);
 
-  const value = { getLists, getListById };
+  const value = { addList, getLists, getListById };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
