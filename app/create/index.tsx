@@ -54,8 +54,18 @@ export default function CreateChecklist() {
       <View>
         {entries.map((item, index) => {
           if (item.parentTo.length > 0) {
-            // return an entry with it's sub-entries as children
-            // <entry>{children.map((item) => sub-entries)}</entry>
+            return (
+              <View>
+                <ChecklistEntryInput key={index} initialTitle={item.title} />
+                {item.parentTo.map((item, index) => (
+                  <ChecklistEntryInput
+                    key={index}
+                    initialTitle={item.title}
+                    child={true}
+                  />
+                ))}
+              </View>
+            );
           } else {
             return (
               <ChecklistEntryInput key={index} initialTitle={item.title} />
