@@ -1,7 +1,8 @@
 import ChecklistEntryInput from "@/components/ChecklistEntryInput";
+import { AppContext } from "@/context/AppContext";
 import { ChecklistEntryType, ChecklistType } from "@/types";
 import { randomUUID } from "expo-crypto";
-import { useState } from "react";
+import { ContextType, useContext, useState } from "react";
 import {
   Pressable,
   SafeAreaView,
@@ -21,6 +22,7 @@ import {
      */
 
 export default function CreateChecklist() {
+  const { addList }: ContextType<typeof AppContext> = useContext(AppContext);
   const [title, setTitle] = useState<string>("Title");
   const [update, setUpdate] = useState<boolean>(false);
   const [entries, setEntries] = useState<ChecklistEntryType[]>([
@@ -91,7 +93,7 @@ export default function CreateChecklist() {
           style={({ pressed }) =>
             pressed ? [styles.button, styles.buttonPressed] : styles.button
           }
-          onPress={() => console.log("shit")}
+          onPress={() => addList({ id: randomUUID(), title, entries })}
         >
           <Text>Create</Text>
         </Pressable>
