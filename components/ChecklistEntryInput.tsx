@@ -4,8 +4,10 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function ListEntryInput({
   initialTitle,
+  child,
 }: {
   initialTitle: string;
+  child?: boolean;
 }) {
   const [title, setTitle] = useState<string>(
     initialTitle != null ? initialTitle : "Entry Title"
@@ -13,7 +15,9 @@ export default function ListEntryInput({
   const [required, setRequired] = useState<boolean>(false);
 
   return (
-    <View style={styles.inputWrapper}>
+    <View
+      style={child ? [styles.inputWrapper, styles.child] : styles.inputWrapper}
+    >
       <TextInput value={title} onChangeText={setTitle} />
       <View style={styles.requiredWrapper}>
         <Text>Required?</Text>
@@ -40,5 +44,11 @@ const styles = StyleSheet.create({
   },
   required: {
     borderRadius: 5,
+  },
+  child: {
+    backgroundColor: "dirtywhite",
+    marginStart: 50,
+    borderStartColor: "black",
+    borderStartWidth: 1,
   },
 });
