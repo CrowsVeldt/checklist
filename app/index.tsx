@@ -61,6 +61,7 @@ export default function Index() {
                   setModalTarget(list);
                   setModalVisible(true);
                 }}
+                key={index}
               />
             );
           })}
