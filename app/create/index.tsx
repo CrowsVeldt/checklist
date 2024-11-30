@@ -5,6 +5,7 @@ import { randomUUID } from "expo-crypto";
 import { router } from "expo-router";
 import { ContextType, useContext, useState } from "react";
 import {
+  Modal,
   Pressable,
   SafeAreaView,
   StyleSheet,
@@ -35,10 +36,37 @@ export default function CreateChecklist() {
       parentTo: [],
     },
   ]);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
   const id: string = randomUUID();
 
   return (
     <SafeAreaView style={styles.page}>
+      <Modal visible={modalVisible} style={styles.modal} animationType="fade">
+        <Text>Are you done creating this list?</Text>
+        <View style={styles.modalButtonContainer}>
+          <Pressable
+            style={[styles.modalButton, styles.confirmAddition]}
+            onPress={() => {
+              addList({ id, title, entries });
+              router.replace({
+                pathname: "/checklist/[checklist]",
+                params: { checklist: id },
+              });
+              setModalVisible(false);
+            }}
+          >
+            <Text style={styles.modalButtonText}>Yes</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.modalButton]}
+            onPress={() => {
+              setModalVisible(false);
+            }}
+          >
+            <Text style={styles.modalButtonText}>No</Text>
+          </Pressable>
+        </View>
+      </Modal>
       <View style={styles.titleInputWrapper}>
         <Text style={styles.titleLabel}>Title:</Text>
         <TextInput
@@ -95,13 +123,7 @@ export default function CreateChecklist() {
           style={({ pressed }) =>
             pressed ? [styles.button, styles.buttonPressed] : styles.button
           }
-          onPress={() => {
-            addList({ id, title, entries });
-            router.push({
-              pathname: "/checklist/[checklist]",
-              params: { checklist: id },
-            });
-          }}
+          onPress={() => setModalVisible(true)}
         >
           <Text>Create</Text>
         </Pressable>
@@ -142,5 +164,29 @@ const styles = StyleSheet.create({
   addEntryButton: {
     borderWidth: 1,
     borderColor: "black",
+  },
+  modal: {
+    height: 200,
+    width: 200,
+  },
+  modalButton: {
+    borderColor: "black",
+    borderWidth: 1,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 100,
+    height: 40,
+  },
+  modalButtonText: {
+    textAlign: "center",
+    textAlignVertical: "center",
+  },
+  confirmAddition: {
+    backgroundColor: "green",
+  },
+  modalButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
   },
 });
