@@ -7,6 +7,7 @@ type AppContextType = {
   deleteList: (list: ChecklistType) => void;
   getLists: () => ChecklistType[];
   getListById: (id: string) => ChecklistType | undefined;
+  updateList: (updatedList: ChecklistType) => void;
 };
 
 export const AppContext = createContext<AppContextType>(
@@ -52,20 +53,24 @@ const AppProvider = ({ children }: { children: any }) => {
     })();
   }, []);
 
+  useEffect(() => {
+    saveData(listKey, lists);
+  }, [lists]);
+
   const addList = (newList: ChecklistType) => {
-    const newLists = [...lists, newList];
-    setLists(newLists);
-    saveData(listKey, newLists);
+    setLists([...lists, newList]);
   };
   const deleteList = (list: ChecklistType) => {
-    const newLists = lists.filter((item) => item.id !== list.id);
-    setLists(newLists);
-    saveData(listKey, newLists);
+    setLists(lists.filter((item) => item.id !== list.id));
   };
   const getLists = () => lists;
   const getListById = (id: string) => lists.find((item) => item.id === id);
+  const updateList = (updatedList: ChecklistType) => {
+    const index = lists.findIndex((item) => item.id === updatedList.id);
+    setLists(lists.toSpliced(index, 1, updatedList));
+  };
 
-  const value = { addList, deleteList, getLists, getListById };
+  const value = { addList, deleteList, getLists, getListById, updateList };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
