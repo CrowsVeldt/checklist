@@ -40,12 +40,13 @@ const AppProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
-        
-      const savedListData = await retrieveData(listKey);
-      setLists(savedListData);
+        const savedListData = await retrieveData(listKey);
+        if (savedListData != null) {
+          setLists(savedListData);
+        }
       } catch (error) {
-       console.warn("An error occurred when retrieving list data") 
-       console.error(error)
+        console.warn("An error occurred when retrieving list data");
+        console.error(error);
       }
     })();
   }, []);

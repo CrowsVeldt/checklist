@@ -26,6 +26,7 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
   }
 };
 
+// used in developement to clear test data
 export const removeData: (key: string) => void = (key) => {
   ass.removeItem(key);
 };
