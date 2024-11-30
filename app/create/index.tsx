@@ -14,16 +14,6 @@ import {
   View,
 } from "react-native";
 
-/*
-      Create Screen contains:
-        Title input: text
-        Entry input: text, required, addChild
-        Submit button: Add new list to list of lists
-
-        Submit button should ask for confirmation before submitting
-        User should be able to drag and drop items to different parts of the list
-     */
-
 export default function CreateChecklist() {
   const { addList }: ContextType<typeof AppContext> = useContext(AppContext);
   const [title, setTitle] = useState<string>("Title");

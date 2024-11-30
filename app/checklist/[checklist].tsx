@@ -6,13 +6,6 @@ import { ContextType, useContext } from "react";
 import { StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-/* 
-  Screen components:
-    - Checklist title
-    - Checklist entries
-    - Checklist settings?
-*/
-
 export default function Checklist() {
   const { getListById }: ContextType<typeof AppContext> =
     useContext(AppContext);
