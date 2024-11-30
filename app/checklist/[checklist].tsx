@@ -1,6 +1,6 @@
 import ChecklistItem from "@/components/ChecklistEntry";
 import { AppContext } from "@/context/AppContext";
-import { ChecklistType } from "@/types";
+import { ChecklistType } from "@/utils/types";
 import { useLocalSearchParams } from "expo-router";
 import { ContextType, useContext } from "react";
 import { StyleSheet, Text } from "react-native";

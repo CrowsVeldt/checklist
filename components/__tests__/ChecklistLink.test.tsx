@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react-native";
 import ChecklistLink from "../ChecklistLink";
-import { ChecklistType } from "@/types";
+import { ChecklistType } from "@/utils/types";
 
 const testList: ChecklistType = {
   id: "123abc",

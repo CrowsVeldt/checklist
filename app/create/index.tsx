@@ -1,6 +1,6 @@
 import ChecklistEntryInput from "@/components/ChecklistEntryInput";
 import { AppContext } from "@/context/AppContext";
-import { ChecklistEntryType } from "@/types";
+import { ChecklistEntryType } from "@/utils/types";
 import { randomUUID } from "expo-crypto";
 import { router } from "expo-router";
 import { ContextType, useContext, useState } from "react";

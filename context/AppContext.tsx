@@ -1,5 +1,6 @@
-import { ChecklistType } from "@/types";
-import React, { createContext, useState } from "react";
+import { retrieveData, saveData } from "@/utils/storage";
+import { ChecklistType } from "@/utils/types";
+import React, { createContext, useEffect, useState } from "react";
 
 type AppContextType = {
   addList: (newList: ChecklistType) => void;
@@ -33,22 +34,28 @@ const AppProvider = ({ children }: { children: any }) => {
         },
       ],
     },
-    {
-      id: "890xyz",
-      title: "default checklist 2",
-      entries: [
-        {
-          id: "567uvw",
-          status: false,
-          title: "item 1",
-          required: true,
-          parentTo: [],
-        },
-      ],
-    },
   ]);
+  const listKey = "listList";
 
-  const addList = (newList: ChecklistType) => setLists([...lists, newList]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const savedListData = await retrieveData(listKey);
+        if (savedListData != null) {
+          setLists(savedListData);
+        }
+      } catch (error) {
+        console.warn("An error occurred when retrieving list data");
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  const addList = (newList: ChecklistType) => {
+    const newLists = [...lists, newList];
+    setLists(newLists);
+    saveData(listKey, newLists);
+  };
   const getLists = () => lists;
   const getListById = (id: string) => lists.find((item) => item.id === id);
 

@@ -1,10 +1,9 @@
 import AddButton from "@/components/AddButton";
 import ChecklistLink from "@/components/ChecklistLink";
 import { AppContext } from "@/context/AppContext";
-import { ChecklistType } from "@/types";
-import { Link } from "expo-router";
+import { ChecklistType } from "@/utils/types";
 import { ContextType, useContext } from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 /* 
