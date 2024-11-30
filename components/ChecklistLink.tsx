@@ -1,6 +1,6 @@
 import { ChecklistType } from "@/utils/types";
 import { router } from "expo-router";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function ChecklistLink({
@@ -23,16 +23,29 @@ export default function ChecklistLink({
       }
     >
       <Text style={styles.listTitle}>{list.title}</Text>
-      <Pressable
-        style={({ pressed }) =>
-          pressed
-            ? [styles.deleteButton, styles.linkPressed]
-            : styles.deleteButton
-        }
-        onPress={() => triggerModal(list)}
-      >
-        <AntDesign name="delete" size={24} color="black" />
-      </Pressable>
+      <View style={styles.buttonContainer}>
+        <Pressable
+          style={({ pressed }) =>
+            pressed ? [styles.button, styles.linkPressed] : styles.button
+          }
+          onPress={() =>
+            router.push({
+              pathname: "/edit",
+              params: { id: list.id },
+            })
+          }
+        >
+          <AntDesign name="edit" size={24} color="black" />
+        </Pressable>
+        <Pressable
+          style={({ pressed }) =>
+            pressed ? [styles.button, styles.linkPressed] : styles.button
+          }
+          onPress={() => triggerModal(list)}
+        >
+          <AntDesign name="delete" size={24} color="black" />
+        </Pressable>
+      </View>
     </Pressable>
   );
 }
@@ -44,7 +57,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: "100%",
     height: 40,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
   },
   linkPressed: {
@@ -53,11 +66,13 @@ const styles = StyleSheet.create({
   listTitle: {
     marginStart: 30,
   },
-  deleteButton: {
-    marginStart: "auto",
+  button: {
     height: "100%",
     width: 40,
     justifyContent: "center",
     alignItems: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
   },
 });
