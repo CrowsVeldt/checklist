@@ -1,18 +1,30 @@
 import Checkbox from "expo-checkbox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function ListEntryInput({
+  id,
   initialTitle,
+  initialRequired,
   child,
+  onEntryChange,
 }: {
+  id: string
   initialTitle: string;
   child?: boolean;
+  initialRequired?: boolean;
+  onEntryChange: any;
 }) {
   const [title, setTitle] = useState<string>(
     initialTitle != null ? initialTitle : "Entry Title"
   );
-  const [required, setRequired] = useState<boolean>(false);
+  const [required, setRequired] = useState<boolean>(
+    initialRequired != null ? initialRequired : false
+  );
+
+  useEffect(() => {
+    onEntryChange(id, title, required, child);
+  }, [title, required]);
 
   return (
     <View
