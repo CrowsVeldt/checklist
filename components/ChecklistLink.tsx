@@ -3,7 +3,13 @@ import { router } from "expo-router";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function ChecklistLink({ list }: { list: ChecklistType }) {
+export default function ChecklistLink({
+  list,
+  triggerModal,
+}: {
+  list: ChecklistType;
+  triggerModal: any;
+}) {
   return (
     <Pressable
       onPress={() =>
@@ -19,9 +25,11 @@ export default function ChecklistLink({ list }: { list: ChecklistType }) {
       <Text style={styles.listTitle}>{list.title}</Text>
       <Pressable
         style={({ pressed }) =>
-          pressed ? [styles.deleteButton, styles.linkPressed] : styles.deleteButton
+          pressed
+            ? [styles.deleteButton, styles.linkPressed]
+            : styles.deleteButton
         }
-        onPress={() => console.log("delete " + list.title)}
+        onPress={() => triggerModal(list)}
       >
         <AntDesign name="delete" size={24} color="black" />
       </Pressable>
@@ -43,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
   },
   listTitle: {
-    marginStart: 30
+    marginStart: 30,
   },
   deleteButton: {
     marginStart: "auto",

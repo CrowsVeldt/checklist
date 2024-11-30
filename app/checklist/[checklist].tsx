@@ -20,7 +20,7 @@ export default function Checklist() {
   const list: ChecklistType | undefined = getListById(checklist);
   return (
     <SafeAreaView style={styles.page}>
-      <Text>{list!.title}</Text>
+      <Text>{list != undefined ? list.title : "Error"}</Text>
       {list &&
         list.entries.map((entry) => (
           <ChecklistItem title={entry.title} key={entry.id} />
