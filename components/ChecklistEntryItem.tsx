@@ -2,7 +2,13 @@ import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function ({ title }: { title: string }) {
+export default function ChecklistEntryItem({
+  title,
+  required,
+}: {
+  title: string;
+  required: boolean;
+}) {
   const [checked, setChecked] = useState<boolean>(false);
   return (
     <View
@@ -20,6 +26,7 @@ export default function ({ title }: { title: string }) {
       >
         {title}
       </Text>
+      <Text>{required ? "!" : ""}</Text>
     </View>
   );
 }

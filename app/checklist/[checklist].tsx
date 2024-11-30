@@ -1,4 +1,4 @@
-import ChecklistItem from "@/components/ChecklistEntry";
+import ChecklistEntryItem from "@/components/ChecklistEntryItem";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistType } from "@/utils/types";
 import { useLocalSearchParams } from "expo-router";
@@ -23,7 +23,11 @@ export default function Checklist() {
       <Text>{list != undefined ? list.title : "Error"}</Text>
       {list &&
         list.entries.map((entry) => (
-          <ChecklistItem title={entry.title} key={entry.id} />
+          <ChecklistEntryItem
+            title={entry.title}
+            required={entry.required}
+            key={entry.id}
+          />
         ))}
     </SafeAreaView>
   );

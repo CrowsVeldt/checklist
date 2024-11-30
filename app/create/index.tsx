@@ -39,6 +39,23 @@ export default function CreateChecklist() {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const id: string = randomUUID();
 
+  const onEntryInputChange = (
+    entryId: string,
+    entryTitle: string,
+    entryRequired: boolean
+  ) => {
+    const index = entries.findIndex((item) => item.id === entryId);
+    setEntries(
+      entries.toSpliced(index, 1, {
+        id: entryId,
+        status: false,
+        title: entryTitle,
+        required: entryRequired,
+        parentTo: [],
+      })
+    );
+  };
+
   return (
     <SafeAreaView style={styles.page}>
       <Modal visible={modalVisible} style={styles.modal} animationType="fade">
@@ -80,19 +97,34 @@ export default function CreateChecklist() {
           if (item.parentTo.length > 0) {
             return (
               <View>
-                <ChecklistEntryInput key={index} initialTitle={item.title} />
+                <ChecklistEntryInput
+                  key={index}
+                  id={item.id}
+                  initialTitle={item.title}
+                  initialRequired={item.required}
+                  onEntryChange={onEntryInputChange}
+                />
                 {item.parentTo.map((item, index) => (
                   <ChecklistEntryInput
                     key={index}
+                    id={item.id}
                     initialTitle={item.title}
+                    initialRequired={item.required}
                     child={true}
+                    onEntryChange={onEntryInputChange}
                   />
                 ))}
               </View>
             );
           } else {
             return (
-              <ChecklistEntryInput key={index} initialTitle={item.title} />
+              <ChecklistEntryInput
+                key={index}
+                id={item.id}
+                initialTitle={item.title}
+                initialRequired={item.required}
+                onEntryChange={onEntryInputChange}
+              />
             );
           }
         })}

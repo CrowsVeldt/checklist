@@ -14,7 +14,7 @@ exports[`<ListEntryInput /> ListEntryInput renders correctly 1`] = `
 >
   <TextInput
     onChangeText={[Function]}
-    value="Entry Title"
+    value="title"
   />
   <View
     style={
