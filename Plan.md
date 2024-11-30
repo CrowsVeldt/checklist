@@ -17,10 +17,5 @@
 
     Checklists list
 
-# Initial state:
-
-    On initial startup have a default/example checklist on the main screen
-
 # Notes:
-
-    App should ask for confirmation before adding a new list
+    - Make subEntry values work with ChecklistEntryInput and ChecklistEntry
