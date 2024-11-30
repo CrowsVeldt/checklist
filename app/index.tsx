@@ -22,8 +22,8 @@ export default function Index() {
   const [modalTarget, setModalTarget] = useState<ChecklistType | undefined>();
   const lists: ChecklistType[] = getLists();
 
-  const removeList = (list: ChecklistType) => {
-    console.log(modalTarget)
+  const removeList: (list: ChecklistType) => void = (list) => {
+    deleteList(modalTarget!);
   };
 
   return (
@@ -34,7 +34,7 @@ export default function Index() {
           <Pressable
             style={[styles.modalButton, styles.confirmDeletion]}
             onPress={() => {
-              removeList(modalTarget!)
+              removeList(modalTarget!);
               setModalVisible(false);
             }}
           >

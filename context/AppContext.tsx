@@ -4,6 +4,7 @@ import React, { createContext, useEffect, useState } from "react";
 
 type AppContextType = {
   addList: (newList: ChecklistType) => void;
+  deleteList: (list: ChecklistType) => void;
   getLists: () => ChecklistType[];
   getListById: (id: string) => ChecklistType | undefined;
 };
@@ -56,10 +57,15 @@ const AppProvider = ({ children }: { children: any }) => {
     setLists(newLists);
     saveData(listKey, newLists);
   };
+  const deleteList = (list: ChecklistType) => {
+    const newLists = lists.filter((item) => item.id !== list.id);
+    setLists(newLists);
+    saveData(listKey, newLists);
+  };
   const getLists = () => lists;
   const getListById = (id: string) => lists.find((item) => item.id === id);
 
-  const value = { addList, getLists, getListById };
+  const value = { addList, deleteList, getLists, getListById };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
