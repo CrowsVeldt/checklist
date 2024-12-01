@@ -57,9 +57,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 10,
     width: "70%",
-    borderColor: "black",
-    borderWidth: 1,
-    borderRadius: 10,
   },
   requiredWrapper: {
     alignItems: "center",

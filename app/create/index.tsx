@@ -1,6 +1,7 @@
 import ChecklistEntryInput from "@/components/ChecklistEntryInput";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistEntryType } from "@/utils/types";
+import { AntDesign } from "@expo/vector-icons";
 import { randomUUID } from "expo-crypto";
 import { router } from "expo-router";
 import { ContextType, useContext, useState } from "react";
@@ -84,30 +85,31 @@ export default function CreateChecklist() {
       </View>
       <View>
         {entries.map((item, index) => {
-          if (item.parentTo.length > 0) {
-            return (
-              <View>
-                <ChecklistEntryInput
-                  key={index}
-                  id={item.id}
-                  initialTitle={item.title}
-                  initialRequired={item.required}
-                  onEntryChange={onEntryInputChange}
-                />
-                {item.parentTo.map((item, index) => (
-                  <ChecklistEntryInput
-                    key={index}
-                    id={item.id}
-                    initialTitle={item.title}
-                    initialRequired={item.required}
-                    child={true}
-                    onEntryChange={onEntryInputChange}
-                  />
-                ))}
-              </View>
-            );
-          } else {
-            return (
+          // if (item.parentTo.length > 0) {
+          // return (
+          // <View>
+          // <ChecklistEntryInput
+          // key={index}
+          // id={item.id}
+          // initialTitle={item.title}
+          // initialRequired={item.required}
+          // onEntryChange={onEntryInputChange}
+          // />
+          // {item.parentTo.map((item, index) => (
+          // <ChecklistEntryInput
+          // key={index}
+          // id={item.id}
+          // initialTitle={item.title}
+          // initialRequired={item.required}
+          // child={true}
+          // onEntryChange={onEntryInputChange}
+          // />
+          // ))}
+          // </View>
+          // );
+          // } else {
+          return (
+            <View style={styles.entryInput}>
               <ChecklistEntryInput
                 key={index}
                 id={item.id}
@@ -115,8 +117,18 @@ export default function CreateChecklist() {
                 initialRequired={item.required}
                 onEntryChange={onEntryInputChange}
               />
-            );
-          }
+              <Pressable
+                style={({ pressed }) =>
+                  pressed
+                    ? [styles.deleteEntry, styles.buttonPressed]
+                    : styles.deleteEntry
+                }
+              >
+                <AntDesign name="delete" size={24} color="black" />
+              </Pressable>
+            </View>
+          );
+          // }
         })}
         <Pressable
           style={({ pressed }) =>
@@ -211,4 +223,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
+  entryInput: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: "black",
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  deleteEntry: {},
 });
