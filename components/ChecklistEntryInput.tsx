@@ -1,6 +1,6 @@
 import Checkbox from "expo-checkbox";
-import { useEffect, useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function ListEntryInput({
   id,
@@ -9,7 +9,7 @@ export default function ListEntryInput({
   child,
   onEntryChange,
 }: {
-  id: string
+  id: string;
   initialTitle: string;
   child?: boolean;
   initialRequired?: boolean;
@@ -22,15 +22,22 @@ export default function ListEntryInput({
     initialRequired != null ? initialRequired : false
   );
 
+  const inputRef = useRef<TextInput>(null);
+
   useEffect(() => {
     onEntryChange(id, title, required, child);
   }, [title, required]);
 
   return (
-    <View
+    <Pressable
       style={child ? [styles.inputWrapper, styles.child] : styles.inputWrapper}
+      onPress={() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+      }}
     >
-      <TextInput value={title} onChangeText={setTitle} />
+      <TextInput value={title} onChangeText={setTitle} ref={inputRef} />
       <View style={styles.requiredWrapper}>
         <Text>Required?</Text>
         <Checkbox
@@ -39,7 +46,7 @@ export default function ListEntryInput({
           onValueChange={setRequired}
         />
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -50,6 +57,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 10,
     width: "70%",
+    borderColor: "black",
+    borderWidth: 1,
+    borderRadius: 10,
   },
   requiredWrapper: {
     alignItems: "center",
