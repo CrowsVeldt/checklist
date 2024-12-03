@@ -4,7 +4,7 @@ import { ChecklistEntryType } from "@/utils/types";
 import { AntDesign } from "@expo/vector-icons";
 import { randomUUID } from "expo-crypto";
 import { router } from "expo-router";
-import { ContextType, useContext, useState } from "react";
+import { ContextType, useContext, useEffect, useState } from "react";
 import {
   Modal,
   Pressable,
@@ -47,6 +47,10 @@ export default function CreateChecklist() {
     );
   };
 
+  useEffect(() => {
+    setEntries(entries)
+  }, [entries]);
+
   return (
     <SafeAreaView style={styles.page}>
       <Modal visible={modalVisible} style={styles.modal} animationType="fade">
@@ -84,51 +88,55 @@ export default function CreateChecklist() {
         />
       </View>
       <View>
-        {entries.map((item, index) => {
-          // if (item.parentTo.length > 0) {
-          // return (
-          // <View>
-          // <ChecklistEntryInput
-          // key={index}
-          // id={item.id}
-          // initialTitle={item.title}
-          // initialRequired={item.required}
-          // onEntryChange={onEntryInputChange}
-          // />
-          // {item.parentTo.map((item, index) => (
-          // <ChecklistEntryInput
-          // key={index}
-          // id={item.id}
-          // initialTitle={item.title}
-          // initialRequired={item.required}
-          // child={true}
-          // onEntryChange={onEntryInputChange}
-          // />
-          // ))}
-          // </View>
-          // );
-          // } else {
-          return (
-            <View style={styles.entryInput} key={index}>
-              <ChecklistEntryInput
-                id={item.id}
-                initialTitle={item.title}
-                initialRequired={item.required}
-                onEntryChange={onEntryInputChange}
-              />
-              <Pressable
-                style={({ pressed }) =>
-                  pressed
-                    ? [styles.deleteEntry, styles.buttonPressed]
-                    : styles.deleteEntry
-                }
-              >
-                <AntDesign name="delete" size={24} color="black" />
-              </Pressable>
-            </View>
-          );
-          // }
-        })}
+        {entries &&
+          entries.map((item, itemIndex) => {
+            // if (item.parentTo.length > 0) {
+            // return (
+            // <View>
+            // <ChecklistEntryInput
+            // key={index}
+            // id={item.id}
+            // initialTitle={item.title}
+            // initialRequired={item.required}
+            // onEntryChange={onEntryInputChange}
+            // />
+            // {item.parentTo.map((item, index) => (
+            // <ChecklistEntryInput
+            // key={index}
+            // id={item.id}
+            // initialTitle={item.title}
+            // initialRequired={item.required}
+            // child={true}
+            // onEntryChange={onEntryInputChange}
+            // />
+            // ))}
+            // </View>
+            // );
+            // } else {
+            return (
+              <View style={styles.entryInput} key={itemIndex}>
+                <ChecklistEntryInput
+                  id={item.id}
+                  initialTitle={item.title}
+                  initialRequired={item.required}
+                  onEntryChange={onEntryInputChange}
+                />
+                <Pressable
+                  style={({ pressed }) =>
+                    pressed
+                      ? [styles.deleteEntry, styles.buttonPressed]
+                      : styles.deleteEntry
+                  }
+                  onPress={() => {
+                    setEntries(entries.toSpliced(itemIndex, 1));
+                  }}
+                >
+                  <AntDesign name="delete" size={24} color="black" />
+                </Pressable>
+              </View>
+            );
+            // }
+          })}
         <Pressable
           style={({ pressed }) =>
             pressed
