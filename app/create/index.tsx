@@ -109,9 +109,8 @@ export default function CreateChecklist() {
           // );
           // } else {
           return (
-            <View style={styles.entryInput}>
+            <View style={styles.entryInput} key={index}>
               <ChecklistEntryInput
-                key={index}
                 id={item.id}
                 initialTitle={item.title}
                 initialRequired={item.required}
