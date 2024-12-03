@@ -53,30 +53,7 @@ export default function EditChecklist() {
         />
       </View>
       <View>
-        {entries.map((item, index) => {
-          if (item.parentTo.length > 0) {
-            return (
-              <View>
-                <ChecklistEntryInput
-                  key={index}
-                  id={item.id}
-                  initialTitle={item.title}
-                  initialRequired={item.required}
-                  onEntryChange={onEntryInputChange}
-                />
-                {item.parentTo.map((item, index) => (
-                  <ChecklistEntryInput
-                    key={index}
-                    id={item.id}
-                    initialTitle={item.title}
-                    initialRequired={item.required}
-                    child={true}
-                    onEntryChange={onEntryInputChange}
-                  />
-                ))}
-              </View>
-            );
-          } else {
+        {entries && entries.map((item, index) => {
             return (
               <ChecklistEntryInput
                 key={index}
@@ -84,9 +61,9 @@ export default function EditChecklist() {
                 initialTitle={item.title}
                 initialRequired={item.required}
                 onEntryChange={onEntryInputChange}
+                remove={() => setEntries(entries.toSpliced(index, 1))}
               />
             );
-          }
         })}
         <Pressable
           style={({ pressed }) =>
