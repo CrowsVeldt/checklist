@@ -7,7 +7,7 @@ describe("<ListEntryInput />", () => {
       <ListEntryInput
         id="abc"
         initialTitle="title"
-        onEntryChange={() => console.log("change")}
+        onEntryChange={() => true}
       />
     ).toJSON();
 

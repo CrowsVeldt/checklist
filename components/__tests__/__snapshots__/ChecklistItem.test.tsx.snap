@@ -60,7 +60,9 @@ exports[`<ChecklistItem /> ChecklistItem renders correctly 1`] = `
   />
   <Text
     style={{}}
-  />
+  >
+    title
+  </Text>
   <Text />
 </View>
 `;
