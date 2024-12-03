@@ -1,3 +1,4 @@
+import { AntDesign } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import { useEffect, useRef, useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
@@ -8,12 +9,14 @@ export default function ListEntryInput({
   initialRequired,
   child,
   onEntryChange,
+  remove,
 }: {
   id: string;
   initialTitle: string;
   child?: boolean;
   initialRequired?: boolean;
   onEntryChange: any;
+  remove: any;
 }) {
   const [title, setTitle] = useState<string>(
     initialTitle != null ? initialTitle : "Entry Title"
@@ -46,6 +49,17 @@ export default function ListEntryInput({
           onValueChange={setRequired}
         />
       </View>
+
+      <Pressable
+        style={({ pressed }) =>
+          pressed
+            ? [styles.deleteEntry, styles.buttonPressed]
+            : styles.deleteEntry
+        }
+        onPress={() => remove()}
+      >
+        <AntDesign name="delete" size={24} color="black" />
+      </Pressable>
     </Pressable>
   );
 }
@@ -70,4 +84,8 @@ const styles = StyleSheet.create({
     borderStartColor: "black",
     borderStartWidth: 1,
   },
+  buttonPressed: {
+    backgroundColor: "lightgray",
+  },
+  deleteEntry: {},
 });
