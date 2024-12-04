@@ -1,3 +1,4 @@
+import { AntDesign } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Pressable, StyleSheet, Text } from "react-native";
 
@@ -9,7 +10,7 @@ export default function AddButton() {
       }
       onPress={() => router.push("/create")}
     >
-      <Text style={styles.buttonText}>+</Text>
+      <AntDesign name="plus" size={36} color="black" />
     </Pressable>
   );
 }
@@ -29,11 +30,5 @@ const styles = StyleSheet.create({
   },
   buttonPressed: {
     backgroundColor: "gray",
-  },
-  buttonText: {
-    height: "100%",
-    width: "100%",
-    textAlign: "center",
-    textAlignVertical: "center",
   },
 });

@@ -46,17 +46,6 @@ exports[`<AddButton /> AddButton renders correctly 1`] = `
     }
   }
 >
-  <Text
-    style={
-      {
-        "height": "100%",
-        "textAlign": "center",
-        "textAlignVertical": "center",
-        "width": "100%",
-      }
-    }
-  >
-    +
-  </Text>
+  <Text />
 </View>
 `;
