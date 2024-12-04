@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 
 export default function TitleInput({
   title,
@@ -9,7 +9,6 @@ export default function TitleInput({
 }) {
   return (
     <View style={styles.titleInputWrapper}>
-      <Text style={styles.titleLabel}>Title:</Text>
       <TextInput
         style={styles.titleInput}
         value={title}
@@ -23,17 +22,13 @@ export default function TitleInput({
 const styles = StyleSheet.create({
   titleInputWrapper: {
     flexDirection: "row",
+    marginVertical: 10,
   },
   titleInput: {
     borderWidth: 1,
     borderColor: "black",
     borderRadius: 10,
-    width: "60%",
-  },
-  titleLabel: {
-    width: "20%",
-    textAlign: "center",
-    textAlignVertical: "center",
-    padding: 10,
+    width: "100%",
+    fontSize: 24,
   },
 });

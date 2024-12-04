@@ -1,3 +1,4 @@
+import AddEntryButton from "@/components/AddEntryButton";
 import ChecklistEntryInput from "@/components/ChecklistEntryInput";
 import TitleInput from "@/components/TitleInput";
 import { AppContext } from "@/context/AppContext";
@@ -5,14 +6,7 @@ import { ChecklistEntryType, ChecklistType } from "@/utils/types";
 import { randomUUID } from "expo-crypto";
 import { router, useLocalSearchParams } from "expo-router";
 import { ContextType, useContext, useState } from "react";
-import {
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default function EditChecklist() {
   const { getListById, updateList }: ContextType<typeof AppContext> =
@@ -45,58 +39,55 @@ export default function EditChecklist() {
 
   return (
     <SafeAreaView style={styles.page}>
-      <TitleInput title={title} setTitle={setTitle} />
-      <View>
-        {entries &&
-          entries.map((item, index) => {
-            return (
-              <ChecklistEntryInput
-                key={index}
-                id={item.id}
-                initialTitle={item.title}
-                initialRequired={item.required}
-                onEntryChange={onEntryInputChange}
-                remove={() => setEntries(entries.toSpliced(index, 1))}
-              />
-            );
-          })}
-        <Pressable
-          style={({ pressed }) =>
-            pressed
-              ? [styles.addEntryButton, styles.buttonPressed]
-              : styles.addEntryButton
-          }
-          onPress={() => {
-            setEntries([
-              ...entries,
-              {
-                id: randomUUID(),
-                status: false,
-                title: "New item",
-                required: false,
-                parentTo: [],
-              },
-            ]);
-          }}
-        >
-          <Text>+</Text>
-        </Pressable>
-      </View>
-      <View>
-        <Pressable
-          style={({ pressed }) =>
-            pressed ? [styles.button, styles.buttonPressed] : styles.button
-          }
-          onPress={() => {
-            updateList({ id, title, entries });
-            router.replace({
-              pathname: "/checklist/[checklist]",
-              params: { checklist: id },
-            });
-          }}
-        >
-          <Text>Update</Text>
-        </Pressable>
+      <View style={styles.formContainer}>
+        <TitleInput title={title} setTitle={setTitle} />
+        <View>
+          {entries &&
+            entries.map((item, index) => {
+              return (
+                <ChecklistEntryInput
+                  key={index}
+                  id={item.id}
+                  initialTitle={item.title}
+                  initialRequired={item.required}
+                  onEntryChange={onEntryInputChange}
+                  remove={() => setEntries(entries.toSpliced(index, 1))}
+                />
+              );
+            })}
+          <AddEntryButton
+            add={() => {
+              setEntries([
+                ...entries,
+                {
+                  id: randomUUID(),
+                  status: false,
+                  title: "New item",
+                  required: false,
+                  parentTo: [],
+                },
+              ]);
+            }}
+          />
+        </View>
+        <View>
+          <Pressable
+            style={({ pressed }) =>
+              pressed
+                ? [styles.updateButton, styles.buttonPressed]
+                : styles.updateButton
+            }
+            onPress={() => {
+              updateList({ id, title, entries });
+              router.replace({
+                pathname: "/checklist/[checklist]",
+                params: { checklist: id },
+              });
+            }}
+          >
+            <Text style={styles.updateButtonText}>Update</Text>
+          </Pressable>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -107,17 +98,22 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  button: {
+  formContainer: {
+    width: "80%",
+  },
+  updateButton: {
     borderWidth: 1,
     borderColor: "black",
-    borderRadius: 5,
+    borderRadius: 10,
     padding: 20,
+    width: 140,
+  },
+  updateButtonText: {
+    fontSize: 24,
+    textAlign: "center",
+    textAlignVertical: "center",
   },
   buttonPressed: {
-    backgroundColor: "lightgray",
-  },
-  addEntryButton: {
-    borderWidth: 1,
-    borderColor: "black",
+    backgroundColor: "gray",
   },
 });

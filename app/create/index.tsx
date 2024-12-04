@@ -1,17 +1,18 @@
+import AddEntryButton from "@/components/AddEntryButton";
 import ChecklistEntryInput from "@/components/ChecklistEntryInput";
 import TitleInput from "@/components/TitleInput";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistEntryType } from "@/utils/types";
+import { AntDesign } from "@expo/vector-icons";
 import { randomUUID } from "expo-crypto";
 import { router } from "expo-router";
-import { ContextType, useContext, useEffect, useState } from "react";
+import { ContextType, useContext, useState } from "react";
 import {
   Modal,
   Pressable,
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from "react-native";
 
@@ -53,7 +54,7 @@ export default function CreateChecklist() {
         <Text>Are you done creating this list?</Text>
         <View style={styles.modalButtonContainer}>
           <Pressable
-            style={[styles.modalButton, styles.confirmAddition]}
+            style={[styles.modalButton, styles.modalConfirmButton]}
             onPress={() => {
               addList({ id, title, entries });
               router.replace({
@@ -75,55 +76,52 @@ export default function CreateChecklist() {
           </Pressable>
         </View>
       </Modal>
-      <TitleInput title={title} setTitle={setTitle} />
-      <View>
-        {entries &&
-          entries.map((item, itemIndex) => {
-            return (
-              <View style={styles.entryInput} key={itemIndex}>
-                <ChecklistEntryInput
-                  id={item.id}
-                  initialTitle={item.title}
-                  initialRequired={item.required}
-                  onEntryChange={onEntryInputChange}
-                  remove={(itemIndex: number) =>
-                    setEntries(entries.toSpliced(itemIndex, 1))
-                  }
-                />
-              </View>
-            );
-          })}
-        <Pressable
-          style={({ pressed }) =>
-            pressed
-              ? [styles.addEntryButton, styles.buttonPressed]
-              : styles.addEntryButton
-          }
-          onPress={() => {
-            setEntries([
-              ...entries,
-              {
-                id: randomUUID(),
-                status: false,
-                title: "New item",
-                required: false,
-                parentTo: [],
-              },
-            ]);
-          }}
-        >
-          <Text>+</Text>
-        </Pressable>
-      </View>
-      <View>
-        <Pressable
-          style={({ pressed }) =>
-            pressed ? [styles.button, styles.buttonPressed] : styles.button
-          }
-          onPress={() => setModalVisible(true)}
-        >
-          <Text>Create</Text>
-        </Pressable>
+      <View style={styles.formContainer}>
+        <TitleInput title={title} setTitle={setTitle} />
+        <View>
+          {entries &&
+            entries.map((item, itemIndex) => {
+              return (
+                <View style={styles.entryInput} key={itemIndex}>
+                  <ChecklistEntryInput
+                    id={item.id}
+                    initialTitle={item.title}
+                    initialRequired={item.required}
+                    onEntryChange={onEntryInputChange}
+                    remove={(itemIndex: number) =>
+                      setEntries(entries.toSpliced(itemIndex, 1))
+                    }
+                  />
+                </View>
+              );
+            })}
+          <AddEntryButton
+            add={() => {
+              setEntries([
+                ...entries,
+                {
+                  id: randomUUID(),
+                  status: false,
+                  title: "New item",
+                  required: false,
+                  parentTo: [],
+                },
+              ]);
+            }}
+          />
+        </View>
+        <View>
+          <Pressable
+            style={({ pressed }) =>
+              pressed
+                ? [styles.createButton, styles.buttonPressed]
+                : styles.createButton
+            }
+            onPress={() => setModalVisible(true)}
+          >
+            <Text style={styles.createButtonText}>Create</Text>
+          </Pressable>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -134,18 +132,31 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  button: {
+  formContainer: {
+    width: "80%",
+    justifyContent: "flex-start",
+  },
+  createButton: {
     borderWidth: 1,
     borderColor: "black",
-    borderRadius: 5,
+    borderRadius: 10,
     padding: 20,
+    width: 140,
+  },
+  createButtonText: {
+    fontSize: 24,
+    textAlign: "center",
+    textAlignVertical: "center",
   },
   buttonPressed: {
     backgroundColor: "lightgray",
   },
-  addEntryButton: {
-    borderWidth: 1,
+  entryInput: {
+    flexDirection: "row",
+    alignItems: "center",
     borderColor: "black",
+    borderWidth: 1,
+    borderRadius: 10,
   },
   modal: {
     height: 200,
@@ -164,18 +175,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
   },
-  confirmAddition: {
+  modalConfirmButton: {
     backgroundColor: "green",
   },
   modalButtonContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-  },
-  entryInput: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderColor: "black",
-    borderWidth: 1,
-    borderRadius: 10,
   },
 });
