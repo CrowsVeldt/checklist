@@ -33,7 +33,7 @@ export default function ListEntryInput({
 
   return (
     <Pressable
-      style={child ? [styles.inputWrapper, styles.child] : styles.inputWrapper}
+      style={styles.inputWrapper}
       onPress={() => {
         if (inputRef.current) {
           inputRef.current.focus();
@@ -41,25 +41,27 @@ export default function ListEntryInput({
       }}
     >
       <TextInput value={title} onChangeText={setTitle} ref={inputRef} />
-      <View style={styles.requiredWrapper}>
-        <Text>Required?</Text>
-        <Checkbox
-          style={styles.required}
-          value={required}
-          onValueChange={setRequired}
-        />
-      </View>
+      <View style={styles.controlWrapper}>
+        <View style={styles.requiredWrapper}>
+          <Text>Required?</Text>
+          <Checkbox
+            style={styles.required}
+            value={required}
+            onValueChange={setRequired}
+          />
+        </View>
 
-      <Pressable
-        style={({ pressed }) =>
-          pressed
-            ? [styles.deleteEntry, styles.buttonPressed]
-            : styles.deleteEntry
-        }
-        onPress={() => remove()}
-      >
-        <AntDesign name="delete" size={24} color="black" />
-      </Pressable>
+        <Pressable
+          style={({ pressed }) =>
+            pressed
+              ? [styles.deleteEntry, styles.buttonPressed]
+              : styles.deleteEntry
+          }
+          onPress={() => remove()}
+        >
+          <AntDesign name="delete" size={24} color="black" />
+        </Pressable>
+      </View>
     </Pressable>
   );
 }
@@ -69,23 +71,32 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 10,
-    width: "70%",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 10,
+    height: 70,
+  },
+  controlWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: 120,
+    height: "100%",
   },
   requiredWrapper: {
     alignItems: "center",
+    height: "100%",
   },
   required: {
     borderRadius: 5,
   },
-  child: {
-    backgroundColor: "dirtywhite",
-    marginStart: 50,
-    borderStartColor: "black",
-    borderStartWidth: 1,
-  },
   buttonPressed: {
     backgroundColor: "lightgray",
   },
-  deleteEntry: {},
+  deleteEntry: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: 50,
+  },
 });

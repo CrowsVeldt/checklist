@@ -3,7 +3,6 @@ import ChecklistEntryInput from "@/components/ChecklistEntryInput";
 import TitleInput from "@/components/TitleInput";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistEntryType } from "@/utils/types";
-import { AntDesign } from "@expo/vector-icons";
 import { randomUUID } from "expo-crypto";
 import { router } from "expo-router";
 import { ContextType, useContext, useState } from "react";
@@ -82,17 +81,16 @@ export default function CreateChecklist() {
           {entries &&
             entries.map((item, itemIndex) => {
               return (
-                <View style={styles.entryInput} key={itemIndex}>
-                  <ChecklistEntryInput
-                    id={item.id}
-                    initialTitle={item.title}
-                    initialRequired={item.required}
-                    onEntryChange={onEntryInputChange}
-                    remove={(itemIndex: number) =>
-                      setEntries(entries.toSpliced(itemIndex, 1))
-                    }
-                  />
-                </View>
+                <ChecklistEntryInput
+                  key={itemIndex}
+                  id={item.id}
+                  initialTitle={item.title}
+                  initialRequired={item.required}
+                  onEntryChange={onEntryInputChange}
+                  remove={(itemIndex: number) =>
+                    setEntries(entries.toSpliced(itemIndex, 1))
+                  }
+                />
               );
             })}
           <AddEntryButton
@@ -150,13 +148,6 @@ const styles = StyleSheet.create({
   },
   buttonPressed: {
     backgroundColor: "lightgray",
-  },
-  entryInput: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderColor: "black",
-    borderWidth: 1,
-    borderRadius: 10,
   },
   modal: {
     height: 200,
