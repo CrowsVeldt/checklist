@@ -1,7 +1,7 @@
 import { AntDesign } from "@expo/vector-icons";
-import Checkbox from "expo-checkbox";
 import { useEffect, useRef, useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
+import RequiredButton from "./RequiredButton";
 
 export default function ListEntryInput({
   id,
@@ -42,14 +42,7 @@ export default function ListEntryInput({
     >
       <TextInput value={title} onChangeText={setTitle} ref={inputRef} />
       <View style={styles.controlWrapper}>
-        <View style={styles.requiredWrapper}>
-          <Text>Required?</Text>
-          <Checkbox
-            style={styles.required}
-            value={required}
-            onValueChange={setRequired}
-          />
-        </View>
+        <RequiredButton initialState={required} changeState={setRequired} />
 
         <Pressable
           style={({ pressed }) =>
@@ -82,13 +75,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 120,
     height: "100%",
-  },
-  requiredWrapper: {
-    alignItems: "center",
-    height: "100%",
-  },
-  required: {
-    borderRadius: 5,
   },
   buttonPressed: {
     backgroundColor: "lightgray",
