@@ -10,6 +10,7 @@ export default function RequiredButton({
   changeState: any;
 }) {
   const [active, setActive] = useState<boolean>(initialState);
+  // replace checkmark with exclamation point
   return (
     <Pressable
       style={styles.required}
