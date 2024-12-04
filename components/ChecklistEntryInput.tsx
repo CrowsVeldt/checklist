@@ -57,7 +57,7 @@ export default function ListEntryInput({
               ? [styles.deleteEntry, styles.buttonPressed]
               : styles.deleteEntry
           }
-          onPress={() => remove()}
+          onPress={remove}
         >
           <AntDesign name="delete" size={24} color="black" />
         </Pressable>
