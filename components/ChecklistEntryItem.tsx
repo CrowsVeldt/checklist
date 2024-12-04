@@ -1,3 +1,4 @@
+import { AntDesign } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -26,7 +27,11 @@ export default function ChecklistEntryItem({
       >
         {title}
       </Text>
-      <Text>{required ? "!" : ""}</Text>
+      {required ? (
+        <AntDesign name="exclamationcircleo" size={25} color="black" />
+      ) : (
+        <AntDesign name="exclamationcircleo" size={25} color="white" />
+      )}
     </View>
   );
 }

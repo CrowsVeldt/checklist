@@ -10,7 +10,6 @@ export default function RequiredButton({
   changeState: any;
 }) {
   const [active, setActive] = useState<boolean>(initialState);
-  // replace checkmark with exclamation point
   return (
     <Pressable
       style={styles.required}
@@ -20,8 +19,8 @@ export default function RequiredButton({
       }}
     >
       <AntDesign
-        name="check"
-        size={50}
+        name="exclamationcircleo"
+        size={45}
         color={active ? "black" : "white"}
         style={styles.checkmark}
       />
