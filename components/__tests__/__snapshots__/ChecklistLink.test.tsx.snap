@@ -37,7 +37,7 @@ exports[`<ChecklistLink /> ChecklistLink renders correctly 1`] = `
       "borderColor": "black",
       "borderWidth": 1,
       "flexDirection": "row",
-      "height": 40,
+      "height": 50,
       "justifyContent": "space-between",
       "width": "100%",
     }
@@ -46,6 +46,7 @@ exports[`<ChecklistLink /> ChecklistLink renders correctly 1`] = `
   <Text
     style={
       {
+        "fontSize": 25,
         "marginStart": 30,
       }
     }
@@ -92,9 +93,11 @@ exports[`<ChecklistLink /> ChecklistLink renders correctly 1`] = `
       style={
         {
           "alignItems": "center",
-          "height": "100%",
+          "borderColor": "black",
+          "borderWidth": 1,
+          "height": 50,
           "justifyContent": "center",
-          "width": 40,
+          "width": 50,
         }
       }
     >
@@ -133,9 +136,11 @@ exports[`<ChecklistLink /> ChecklistLink renders correctly 1`] = `
       style={
         {
           "alignItems": "center",
-          "height": "100%",
+          "borderColor": "black",
+          "borderWidth": 1,
+          "height": 50,
           "justifyContent": "center",
-          "width": 40,
+          "width": 50,
         }
       }
     >

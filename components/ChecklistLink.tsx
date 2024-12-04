@@ -56,21 +56,24 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
     width: "100%",
-    height: 40,
+    height: 50,
     justifyContent: "space-between",
     alignItems: "center",
   },
   linkPressed: {
-    backgroundColor: "lightgray",
+    backgroundColor: "gray",
   },
   listTitle: {
     marginStart: 30,
+    fontSize: 25,
   },
   button: {
-    height: "100%",
-    width: 40,
+    height: 50,
+    width: 50,
     justifyContent: "center",
     alignItems: "center",
+    borderColor: "black",
+    borderWidth: 1,
   },
   buttonContainer: {
     flexDirection: "row",

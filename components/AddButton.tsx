@@ -1,6 +1,6 @@
 import { AntDesign } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
 export default function AddButton() {
   return (
