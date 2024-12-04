@@ -29,6 +29,7 @@ exports[`<CreateChecklist /> Index renders correctly 1`] = `
       Title:
     </Text>
     <TextInput
+      maxLength={16}
       onChangeText={[Function]}
       style={
         {

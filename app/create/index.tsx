@@ -1,4 +1,5 @@
 import ChecklistEntryInput from "@/components/ChecklistEntryInput";
+import TitleInput from "@/components/TitleInput";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistEntryType } from "@/utils/types";
 import { randomUUID } from "expo-crypto";
@@ -74,14 +75,7 @@ export default function CreateChecklist() {
           </Pressable>
         </View>
       </Modal>
-      <View style={styles.titleInputWrapper}>
-        <Text style={styles.titleLabel}>Title:</Text>
-        <TextInput
-          style={styles.titleInput}
-          value={title}
-          onChangeText={setTitle}
-        />
-      </View>
+      <TitleInput title={title} setTitle={setTitle} />
       <View>
         {entries &&
           entries.map((item, itemIndex) => {
@@ -139,21 +133,6 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     alignItems: "center",
-  },
-  titleInputWrapper: {
-    flexDirection: "row",
-  },
-  titleInput: {
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 10,
-    width: "60%",
-  },
-  titleLabel: {
-    width: "20%",
-    textAlign: "center",
-    textAlignVertical: "center",
-    padding: 10,
   },
   button: {
     borderWidth: 1,
