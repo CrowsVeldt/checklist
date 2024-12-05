@@ -27,4 +27,3 @@
     - Make subEntry values work with ChecklistEntryInput and ChecklistEntry
     - Make entries a scrollable list on create, edit, and checklist screens
     - improve format of checklist screen
-    - improve navigation behavior when navigating to/from edit screen
