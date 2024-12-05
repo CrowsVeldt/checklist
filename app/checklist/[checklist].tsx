@@ -6,6 +6,7 @@ import { router, Stack, useLocalSearchParams } from "expo-router";
 import { ContextType, useContext, useEffect, useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Toast from "react-native-toast-message";
 
 export default function Checklist() {
   const { getListById }: ContextType<typeof AppContext> =
@@ -56,6 +57,16 @@ export default function Checklist() {
       return v;
     });
   }, [entries]);
+
+  useEffect(() => {
+    (() => {
+      if (numberCompleted === entries?.length) {
+        Toast.show({
+          text1: "Checklist Complete!",
+        });
+      }
+    })();
+  }, [numberCompleted]);
 
   return (
     <SafeAreaView style={styles.page}>

@@ -6,15 +6,6 @@ import { ContextType, useContext, useState } from "react";
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-/* 
-  Screen contains: 
-    - A list of checklists
-    - A "+" button
-
-  When a checklist is selected, navigate to checklist screen
-  When the "+" button is pressed navigate to the checklist creation screen
-*/
-
 export default function Index() {
   const { getLists, deleteList }: ContextType<typeof AppContext> =
     useContext(AppContext);
