@@ -1,26 +1,67 @@
 import ChecklistEntryItem from "@/components/ChecklistEntryItem";
 import { AppContext } from "@/context/AppContext";
-import { ChecklistType } from "@/utils/types";
+import { ChecklistEntryType, ChecklistType } from "@/utils/types";
 import { AntDesign } from "@expo/vector-icons";
 import { router, Stack, useLocalSearchParams } from "expo-router";
-import { ContextType, useContext, useState } from "react";
+import { ContextType, useContext, useEffect, useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Checklist() {
   const { getListById }: ContextType<typeof AppContext> =
     useContext(AppContext);
-  const [editPressed, setEditPressed] = useState<boolean>(false);
   const { checklist }: { checklist: string } = useLocalSearchParams();
   const list: ChecklistType | undefined = getListById(checklist);
+  const [entries, setEntries] = useState<ChecklistEntryType[] | undefined>(
+    list?.entries
+  );
+  const [numberCompleted, setNumberCompleted] = useState<number>(0);
+  const [editPressed, setEditPressed] = useState<boolean>(false);
 
-  // track state of checkboxes so that checklist knows how many have been checked
+  const setFinished: (id: string) => void = (id) => {
+    try {
+      if (entries != null) {
+        const entry = entries.find((item) => item.id === id);
+        if (entry != null) {
+          const newEntries = entries.toSpliced(
+            entries.findIndex((item) => item.id === id),
+            1,
+            {
+              id: entry.id,
+              title: entry.title,
+              parentTo: entry.parentTo,
+              required: entry.required,
+              status: !entry.status,
+            }
+          );
+          setEntries(newEntries);
+        } else {
+          throw new Error("Entry not found in checklist");
+        }
+      } else {
+        throw new TypeError("Checklist entries property is null");
+      }
+    } catch (error) {
+      console.warn("An error was thrown when updating checklist entry status");
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    setNumberCompleted(() => {
+      let v: number = 0;
+      entries?.forEach((item) => {
+        if (item.status === true) v++;
+      });
+      return v;
+    });
+  }, [entries]);
 
   return (
     <SafeAreaView style={styles.page}>
       <Stack.Screen
         options={{
-          title: `${list?.title} - ${0}/${list?.entries.length}`,
+          title: `${list?.title} - ${numberCompleted}/${entries?.length}`,
           headerRight: () => (
             <Pressable
               onPressIn={() => {
@@ -44,8 +85,10 @@ export default function Checklist() {
       {list &&
         list.entries.map((entry, index) => (
           <ChecklistEntryItem
+            id={entry.id}
             title={entry.title}
             required={entry.required}
+            setFinished={setFinished}
             key={entry.id}
           />
         ))}

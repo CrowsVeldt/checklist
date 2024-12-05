@@ -3,11 +3,15 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function ChecklistEntryItem({
+  id,
   title,
   required,
+  setFinished,
 }: {
+  id: string;
   title: string;
   required: boolean;
+  setFinished: (id: string) => void;
 }) {
   const [checked, setChecked] = useState<boolean>(false);
   return (
@@ -18,7 +22,12 @@ export default function ChecklistEntryItem({
           : styles.checklistItem
       }
     >
-      <Pressable onPress={() => setChecked(!checked)}>
+      <Pressable
+        onPress={() => {
+          setFinished(id);
+          setChecked(!checked);
+        }}
+      >
         <View style={styles.box}>
           {checked && <AntDesign name="check" size={30} color={"black"} />}
         </View>
