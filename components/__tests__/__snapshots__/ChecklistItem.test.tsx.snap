@@ -11,54 +11,6 @@ exports[`<ChecklistItem /> ChecklistItem renders correctly 1`] = `
   }
 >
   <View
-    accessibilityRole="checkbox"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": false,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      [
-        {
-          "borderColor": "#657786",
-          "borderRadius": 2,
-          "borderWidth": 2,
-          "height": 20,
-          "width": 20,
-        },
-        undefined,
-        false,
-        false,
-        undefined,
-        false,
-      ]
-    }
-  />
-  <View
     accessibilityState={
       {
         "busy": undefined,
@@ -88,15 +40,14 @@ exports[`<ChecklistItem /> ChecklistItem renders correctly 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    style={{}}
   >
     <View
       style={
         {
           "borderColor": "black",
           "borderWidth": 1,
-          "height": 20,
-          "width": 20,
+          "height": 30,
+          "width": 30,
         }
       }
     />

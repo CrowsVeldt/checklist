@@ -1,5 +1,4 @@
 import { AntDesign } from "@expo/vector-icons";
-import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -19,12 +18,10 @@ export default function ChecklistEntryItem({
           : styles.checklistItem
       }
     >
-      <Checkbox value={checked} onValueChange={setChecked} />
-      <Pressable
-        style={checked ? [styles.checked, styles.checkbox] : styles.checkbox}
-        onPress={() => setChecked(!checked)}
-      >
-        <View style={styles.box} />
+      <Pressable onPress={() => setChecked(!checked)}>
+        <View style={styles.box}>
+          {checked && <AntDesign name="check" size={30} color={"black"} />}
+        </View>
       </Pressable>
       <Text
         style={
@@ -58,12 +55,10 @@ const styles = StyleSheet.create({
     textDecorationStyle: "solid",
     color: "gray",
   },
-  checkbox: {},
-  checked: {}, 
   box: {
     borderWidth: 1,
     borderColor: "black",
-    height: 20,
-    width: 20,
+    height: 30,
+    width: 30,
   },
 });
