@@ -66,7 +66,10 @@ export default function Checklist() {
             <Pressable
               onPressIn={() => {
                 setEditPressed(true);
-                router.push({ pathname: "/edit", params: { id: checklist } });
+                router.replace({
+                  pathname: "/edit",
+                  params: { id: checklist },
+                });
               }}
               onPressOut={() => {
                 setEditPressed(false);
