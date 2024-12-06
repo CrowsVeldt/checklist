@@ -18,6 +18,9 @@ export default function ChecklistEntryItem({
   const width = useSharedValue(0);
 
   const strikeThrough: () => void = () => {
+    // make strike through animation continuous, not withSpring
+    // make strike through width match the width of the item text
+    // make the strike through work for all screen widths
     width.value = checked ? withSpring(50) : withSpring(0);
   };
 
