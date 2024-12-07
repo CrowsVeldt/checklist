@@ -27,3 +27,4 @@
 
     - Make subEntry values work with ChecklistEntryInput and ChecklistEntry
     - Make entries a scrollable list on create, edit, and checklist screens
+    - give up on snapshot testing for now

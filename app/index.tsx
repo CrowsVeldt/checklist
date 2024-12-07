@@ -3,7 +3,14 @@ import ChecklistLink from "@/components/ChecklistLink";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistType } from "@/utils/types";
 import { ContextType, useContext, useState } from "react";
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Modal,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -43,19 +50,19 @@ export default function Index() {
         </View>
       </Modal>
       <View>
-        {lists &&
-          lists.map((list, index) => {
-            return (
-              <ChecklistLink
-                list={list}
-                triggerModal={(list: ChecklistType) => {
-                  setModalTarget(list);
-                  setModalVisible(true);
-                }}
-                key={index}
-              />
-            );
-          })}
+        <FlatList
+          data={lists}
+          renderItem={({ item }) => (
+            <ChecklistLink
+              list={item}
+              triggerModal={(list: ChecklistType) => {
+                setModalTarget(list);
+                setModalVisible(true);
+              }}
+            />
+          )}
+          keyExtractor={item => item.id}
+        />
       </View>
       <AddButton />
     </SafeAreaView>
