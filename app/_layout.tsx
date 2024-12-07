@@ -14,6 +14,7 @@ export default function RootLayout() {
           options={{ title: "Create Checklist" }}
         />
         <Stack.Screen name="edit/index" options={{ title: "Edit Checklist" }} />
+        <Stack.Screen name="checklist/[checklist]" />
       </Stack>
       <Toast topOffset={700} />
     </AppProvider>
