@@ -16,7 +16,7 @@ export default function ChecklistItemInput({
   child?: boolean;
   initialRequired?: boolean;
   onEntryChange: any;
-  remove: any;
+  remove: () => void;
 }) {
   const [title, setTitle] = useState<string>(
     initialTitle != null ? initialTitle : "Entry Title"

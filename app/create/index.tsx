@@ -87,9 +87,7 @@ export default function CreateChecklist() {
                   initialTitle={item.title}
                   initialRequired={item.required}
                   onEntryChange={onEntryInputChange}
-                  remove={(itemIndex: number) =>
-                    setEntries(entries.toSpliced(itemIndex, 1))
-                  }
+                  remove={() => setEntries(entries.toSpliced(itemIndex, 1))}
                 />
               );
             })}
