@@ -7,6 +7,7 @@ import { randomUUID } from "expo-crypto";
 import { router } from "expo-router";
 import { ContextType, useContext, useState } from "react";
 import {
+  FlatList,
   Modal,
   Pressable,
   SafeAreaView,
@@ -83,19 +84,20 @@ export default function CreateChecklist() {
       <View style={styles.formContainer}>
         <TitleInput title={title} setTitle={setTitle} />
         <View>
-          {entries &&
-            entries.map((item, itemIndex) => {
-              return (
-                <ChecklistItemInput
-                  key={itemIndex}
-                  id={item.id}
-                  initialTitle={item.title}
-                  initialRequired={item.required}
-                  onEntryChange={onEntryInputChange}
-                  remove={() => removeEntry(item.id)}
-                />
-              );
-            })}
+          <FlatList
+            style={styles.list}
+            data={entries}
+            renderItem={({ item }) => (
+              <ChecklistItemInput
+                id={item.id}
+                initialTitle={item.title}
+                initialRequired={item.required}
+                onEntryChange={onEntryInputChange}
+                remove={() => removeEntry(item.id)}
+              />
+            )}
+            keyExtractor={(item) => item.id}
+          />
           <AddEntryButton
             add={() => {
               setEntries([
@@ -136,6 +138,9 @@ const styles = StyleSheet.create({
   formContainer: {
     width: "80%",
     justifyContent: "flex-start",
+  },
+  list: {
+    height: "70%"
   },
   createButton: {
     borderWidth: 1,
