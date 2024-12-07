@@ -23,12 +23,14 @@ const styles = StyleSheet.create({
     width: 50,
     borderColor: "black",
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 25,
     position: "absolute",
     bottom: 20,
     right: 20,
+    backgroundColor: "whitesmoke",
+    elevation: 5,
   },
   buttonPressed: {
-    backgroundColor: "gray",
+    backgroundColor: "lightgray",
   },
 });
