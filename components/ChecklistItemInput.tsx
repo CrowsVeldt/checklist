@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import RequiredButton from "./RequiredButton";
 
-export default function ListEntryInput({
+export default function ChecklistItemInput({
   id,
   initialTitle,
   initialRequired,

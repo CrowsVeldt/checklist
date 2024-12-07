@@ -1,5 +1,5 @@
 import AddEntryButton from "@/components/AddEntryButton";
-import ChecklistEntryInput from "@/components/ChecklistEntryInput";
+import ChecklistItemInput from "@/components/ChecklistItemInput";
 import TitleInput from "@/components/TitleInput";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistEntryType, ChecklistType } from "@/utils/types";
@@ -45,7 +45,7 @@ export default function EditChecklist() {
           {entries &&
             entries.map((item, index) => {
               return (
-                <ChecklistEntryInput
+                <ChecklistItemInput
                   key={index}
                   id={item.id}
                   initialTitle={item.title}

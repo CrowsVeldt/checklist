@@ -1,4 +1,4 @@
-import ChecklistEntryItem from "@/components/ChecklistEntryItem";
+import ChecklistItem from "@/components/ChecklistItem";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistEntryType, ChecklistType } from "@/utils/types";
 import { AntDesign } from "@expo/vector-icons";
@@ -98,7 +98,7 @@ export default function Checklist() {
       />
       {list &&
         list.entries.map((entry, index) => (
-          <ChecklistEntryItem
+          <ChecklistItem
             id={entry.id}
             title={entry.title}
             required={entry.required}
