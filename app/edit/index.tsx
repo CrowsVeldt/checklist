@@ -6,7 +6,14 @@ import { ChecklistEntryType, ChecklistType } from "@/utils/types";
 import { randomUUID } from "expo-crypto";
 import { router, useLocalSearchParams } from "expo-router";
 import { ContextType, useContext, useState } from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function EditChecklist() {
   const { getListById, updateList }: ContextType<typeof AppContext> =
@@ -47,19 +54,20 @@ export default function EditChecklist() {
       <View style={styles.formContainer}>
         <TitleInput title={title} setTitle={setTitle} />
         <View>
-          {entries &&
-            entries.map((item, index) => {
-              return (
-                <ChecklistItemInput
-                  key={index}
-                  id={item.id}
-                  initialTitle={item.title}
-                  initialRequired={item.required}
-                  onEntryChange={onEntryInputChange}
-                  remove={() => removeEntry(item.id)}
-                />
-              );
-            })}
+          <FlatList
+          style={styles.list}
+            data={entries}
+            renderItem={({ item }) => (
+              <ChecklistItemInput
+                id={item.id}
+                initialTitle={item.title}
+                initialRequired={item.required}
+                onEntryChange={onEntryInputChange}
+                remove={() => removeEntry(item.id)}
+              />
+            )}
+            keyExtractor={(item) => item.id}
+          />
           <AddEntryButton
             add={() => {
               setEntries([
@@ -105,6 +113,9 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: "80%",
+  },
+  list: {
+    height: "70%"
   },
   updateButton: {
     borderWidth: 1,
