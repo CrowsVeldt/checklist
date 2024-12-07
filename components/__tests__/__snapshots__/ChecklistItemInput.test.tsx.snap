@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ListEntryInput /> ListEntryInput renders correctly 1`] = `
+exports[`<ChecklistItemInput /> ChecklistItemInput renders correctly 1`] = `
 <View
   accessibilityState={
     {
