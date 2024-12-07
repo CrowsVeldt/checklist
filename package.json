@@ -13,7 +13,7 @@
   },
   "jest": {
     "preset": "jest-expo",
-    "setupFiles": [
+    "setupFilesAfterEnv": [
       "./jest-setup.js"
     ]
   },
