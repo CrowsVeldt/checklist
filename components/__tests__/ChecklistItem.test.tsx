@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react-native";
-import ChecklistItem from "../ChecklistEntryItem";
+import ChecklistItem from "../ChecklistItem";
 
 describe("<ChecklistItem />", () => {
   test("ChecklistItem renders correctly", () => {

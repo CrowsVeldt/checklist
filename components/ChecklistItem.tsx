@@ -6,7 +6,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-export default function ChecklistEntryItem({
+export default function ChecklistItem({
   id,
   title,
   required,

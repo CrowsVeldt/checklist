@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react-native";
-import ListEntryInput from "../ChecklistEntryInput";
+import ChecklistItemInput from "../ChecklistItemInput";
 
-describe("<ListEntryInput />", () => {
-  test("ListEntryInput renders correctly", () => {
+describe("<ChecklistItemInput />", () => {
+  test("ChecklistItemInput renders correctly", () => {
     const tree = render(
-      <ListEntryInput
+      <ChecklistItemInput
         id="abc"
         initialTitle="title"
         onEntryChange={() => true}
