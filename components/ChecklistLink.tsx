@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
   },
   listTitle: {
-    marginStart: 30,
+    marginStart: 10,
     fontSize: 25,
   },
   button: {
