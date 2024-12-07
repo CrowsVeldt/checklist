@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   linkPressed: {
-    backgroundColor: "gray",
+    backgroundColor: "lightgray",
   },
   listTitle: {
     marginStart: 30,
