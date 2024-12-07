@@ -7,7 +7,9 @@ describe("<ListEntryInput />", () => {
       <ListEntryInput
         id="abc"
         initialTitle="title"
-        onEntryChange={() => true}
+        initialRequired={false}
+        onEntryChange={() => null}
+        remove={() => null}
       />
     ).toJSON();
 
