@@ -3,7 +3,7 @@ import Checklist from "../[checklist]";
 import AppProvider from "@/context/AppContext";
 
 describe("<Checklist />", () => {
-  test("Checklist renders correctly", () => {
+  test("[checklist] renders correctly", () => {
     const tree = render(
       <AppProvider>
         <Checklist />

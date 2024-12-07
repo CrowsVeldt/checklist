@@ -9,12 +9,12 @@ export default function RootLayout() {
       <StatusBar style="dark" />
       <Stack>
         <Stack.Screen name="index" options={{ title: "Checklists" }} />
+        <Stack.Screen name="checklist/[checklist]" />
         <Stack.Screen
           name="create/index"
           options={{ title: "Create Checklist" }}
         />
         <Stack.Screen name="edit/index" options={{ title: "Edit Checklist" }} />
-        <Stack.Screen name="checklist/[checklist]" />
       </Stack>
       <Toast topOffset={700} />
     </AppProvider>
