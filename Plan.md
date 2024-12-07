@@ -31,3 +31,4 @@
 
 # Bugs: 
     - when removing entry item on edit or create screens the remaining item(s) title(s) do not update correctly
+    - when checklistiteminput is pressed it sets the curser at the beginning of the text

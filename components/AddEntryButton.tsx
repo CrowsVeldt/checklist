@@ -22,22 +22,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: "black",
+    borderRadius: 25,
     width: 40,
     height: 40,
     marginVertical: 10,
   },
   buttonPressed: {
-    backgroundColor: "gray",
+    backgroundColor: "lightgray",
   },
 });
-
-// setEntries([
-// ...entries,
-// {
-// id: randomUUID(),
-// status: false,
-// title: "New item",
-// required: false,
-// parentTo: [],
-// },
-// ]);

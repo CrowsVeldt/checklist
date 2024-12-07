@@ -10,6 +10,8 @@ export default function ChecklistItemInput({
   child,
   onEntryChange,
   remove,
+  first,
+  last,
 }: {
   id: string;
   initialTitle: string;
@@ -17,6 +19,8 @@ export default function ChecklistItemInput({
   initialRequired?: boolean;
   onEntryChange: any;
   remove: () => void;
+  first?: boolean;
+  last?: boolean;
 }) {
   const [title, setTitle] = useState<string>(
     initialTitle != null ? initialTitle : "Entry Title"
@@ -33,7 +37,10 @@ export default function ChecklistItemInput({
 
   return (
     <Pressable
-      style={styles.inputWrapper}
+      style={[
+        styles.inputWrapper,
+        first ? styles.firstItem : last ? styles.lastItem : {},
+      ]}
       onPress={() => {
         if (inputRef.current) {
           inputRef.current.focus();
@@ -47,8 +54,8 @@ export default function ChecklistItemInput({
         <Pressable
           style={({ pressed }) =>
             pressed
-              ? [styles.deleteEntry, styles.buttonPressed]
-              : styles.deleteEntry
+              ? [styles.deleteEntryButton, styles.buttonPressed]
+              : styles.deleteEntryButton
           }
           onPress={remove}
         >
@@ -66,8 +73,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderWidth: 1,
     borderColor: "black",
-    borderRadius: 10,
     height: 70,
+    marginBottom: 3
+  },
+  firstItem: {
+    borderTopStartRadius: 10,
+    borderTopEndRadius: 10,
+  },
+  lastItem: {
+    borderBottomStartRadius: 10,
+    borderBottomEndRadius: 10,
   },
   controlWrapper: {
     flexDirection: "row",
@@ -79,7 +94,7 @@ const styles = StyleSheet.create({
   buttonPressed: {
     backgroundColor: "lightgray",
   },
-  deleteEntry: {
+  deleteEntryButton: {
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
