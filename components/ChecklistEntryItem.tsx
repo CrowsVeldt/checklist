@@ -1,7 +1,10 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
+import { Pressable, StyleSheet, View } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
 
 export default function ChecklistEntryItem({
   id,
@@ -15,47 +18,44 @@ export default function ChecklistEntryItem({
   setFinished: (id: string) => void;
 }) {
   const [checked, setChecked] = useState<boolean>(false);
-  const width = useSharedValue(0);
 
-  const strikeThrough: () => void = () => {
-    // make strike through animation continuous, not withSpring
-    // make strike through width match the width of the item text
-    // make the strike through work for all screen widths
-    width.value = checked ? withSpring(50) : withSpring(0);
-  };
+  const animatedStrikethroughStyles = useAnimatedStyle(() => {
+    return {
+      width: checked ? withTiming("83%") : withTiming("0%"),
+      borderWidth: checked ? withTiming(1) : withTiming(0),
+      display: checked ? withTiming("flex") : withTiming("none"),
+    };
+  });
+
+  const animatedTextStyles = useAnimatedStyle(() => {
+    return {
+      color: checked ? withTiming("gray") : withTiming("black"),
+    };
+  });
+
+  const animatedViewStyles = useAnimatedStyle(() => {
+    return {
+      backgroundColor: checked
+        ? withTiming("lightgray")
+        : withTiming("transparent"),
+    };
+  });
 
   return (
-    <View>
+    <Animated.View style={[styles.itemContainer, animatedViewStyles]}>
       <Pressable
         onPress={() => {
-          strikeThrough();
           setFinished(id);
           setChecked(!checked);
         }}
-        style={styles.checklistItem}
+        style={[styles.checklistItem]}
       >
         <View style={styles.box}>
           {checked && <AntDesign name="check" size={30} color={"black"} />}
         </View>
-        <Text
-          style={
-            checked
-              ? [styles.itemCheckedText, styles.itemText]
-              : styles.itemText
-          }
-        >
-          {title}
-        </Text>
+        <Animated.Text style={animatedTextStyles}>{title}</Animated.Text>
         <Animated.View
-          style={{
-            height: 1,
-            width,
-            borderColor: "gray",
-            borderWidth: 1,
-            alignSelf: "center",
-            position: "absolute",
-            start: 140,
-          }}
+          style={[styles.strikeThrough, animatedStrikethroughStyles]}
         />
         {required ? (
           <AntDesign name="exclamationcircleo" size={25} color="black" />
@@ -63,30 +63,33 @@ export default function ChecklistEntryItem({
           <AntDesign name="exclamationcircleo" size={25} color="white" />
         )}
       </Pressable>
-    </View>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
+  itemContainer: {
+    borderEndEndRadius: 25,
+    borderEndStartRadius: 25,
+    marginBottom: 1,
+  },
   checklistItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     width: "80%",
   },
-  checklistCheckedItem: {
-    backgroundColor: "lightgray",
-  },
-  itemText: {},
-  itemCheckedText: {
-    textDecorationColor: "black",
-    textDecorationStyle: "solid",
-    color: "gray",
-  },
   box: {
     borderWidth: 1,
     borderColor: "black",
     height: 30,
     width: 30,
+  },
+  strikeThrough: {
+    height: 1,
+    borderColor: "gray",
+    alignSelf: "center",
+    position: "absolute",
+    start: 30,
   },
 });
