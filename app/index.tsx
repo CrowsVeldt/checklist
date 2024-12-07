@@ -1,4 +1,4 @@
-import AddButton from "@/components/AddButton";
+import NewListButton from "@/components/NewListButton";
 import ChecklistLink from "@/components/ChecklistLink";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistType } from "@/utils/types";
@@ -61,10 +61,10 @@ export default function Index() {
               }}
             />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
         />
       </View>
-      <AddButton />
+      <NewListButton />
     </SafeAreaView>
   );
 }

@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react-native";
-import AddButton from "../AddButton";
+import AddButton from "../NewListButton";
 
 describe("<AddButton />", () => {
   test("AddButton renders correctly", () => {
