@@ -28,9 +28,9 @@ export default function Index() {
     <SafeAreaView style={styles.mainView}>
       <Modal visible={modalVisible} style={styles.modal} animationType="fade">
         <Text>Are you sure you want to delete the list?</Text>
-        <View style={styles.buttonContainer}>
+        <View style={styles.modalButtonContainer}>
           <Pressable
-            style={[styles.modalButton, styles.confirmDeletion]}
+            style={[styles.modalButton, styles.modalConfirmDeletion]}
             onPress={() => {
               removeList(modalTarget!);
               setModalVisible(false);
@@ -49,7 +49,7 @@ export default function Index() {
           </Pressable>
         </View>
       </Modal>
-      <View>
+      <View style={styles.listContainer}>
         <FlatList
           data={lists}
           renderItem={({ item }) => (
@@ -74,6 +74,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  listContainer: {
+    width: "90%"
+  },
   modal: {
     height: 200,
     width: 200,
@@ -91,11 +94,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
   },
-  confirmDeletion: {
+  modalConfirmDeletion: {
     backgroundColor: "red",
   },
-  buttonContainer: {
+  modalButtonContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
+    width: "60%",
   },
 });
