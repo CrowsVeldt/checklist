@@ -28,3 +28,6 @@
     - Make subEntry values work with ChecklistEntryInput and ChecklistEntry
     - Make entries a scrollable list on create, edit, and checklist screens
     - give up on snapshot testing for now
+
+# Bugs: 
+    - when removing entry item on edit or create screens the remaining item(s) title(s) do not update correctly

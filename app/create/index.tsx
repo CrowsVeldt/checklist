@@ -30,11 +30,16 @@ export default function CreateChecklist() {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const id: string = randomUUID();
 
-  const onEntryInputChange = (
+  const removeEntry: (id: string) => void = (id) => {
+    const index = entries.findIndex((item) => item.id === id);
+    setEntries(entries.toSpliced(index, 1));
+  };
+
+  const onEntryInputChange: (
     entryId: string,
     entryTitle: string,
     entryRequired: boolean
-  ) => {
+  ) => void = (entryId, entryTitle, entryRequired) => {
     const index = entries.findIndex((item) => item.id === entryId);
     setEntries(
       entries.toSpliced(index, 1, {
@@ -87,7 +92,7 @@ export default function CreateChecklist() {
                   initialTitle={item.title}
                   initialRequired={item.required}
                   onEntryChange={onEntryInputChange}
-                  remove={() => setEntries(entries.toSpliced(itemIndex, 1))}
+                  remove={() => removeEntry(item.id)}
                 />
               );
             })}
