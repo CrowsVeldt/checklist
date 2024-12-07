@@ -3,7 +3,14 @@ import ChecklistItem from "../ChecklistItem";
 
 describe("<ChecklistItem />", () => {
   test("ChecklistItem renders correctly", () => {
-    const tree = render(<ChecklistItem title="title" required={false}/>).toJSON();
+    const tree = render(
+      <ChecklistItem
+        id="123abc"
+        title="title"
+        required={false}
+        setFinished={() => undefined}
+      />
+    ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
