@@ -52,13 +52,15 @@ export default function Index() {
       <View style={styles.listContainer}>
         <FlatList
           data={lists}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <ChecklistLink
               list={item}
               triggerModal={(list: ChecklistType) => {
                 setModalTarget(list);
                 setModalVisible(true);
               }}
+              first={index === 0}
+              last={index === lists.length - 1}
             />
           )}
           keyExtractor={(item) => item.id}
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   listContainer: {
-    width: "90%"
+    width: "90%",
   },
   modal: {
     height: 200,
