@@ -26,6 +26,7 @@
 # TODO:
 
     - Make subEntry values work with ChecklistEntryInput and ChecklistEntry
+    - disable create/edit checklist button for list without any items
     - give up on snapshot testing for now
 
 # Bugs: 
