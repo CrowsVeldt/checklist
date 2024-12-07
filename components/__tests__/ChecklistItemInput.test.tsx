@@ -8,6 +8,7 @@ describe("<ChecklistItemInput />", () => {
         id="abc"
         initialTitle="title"
         onEntryChange={() => true}
+        remove={() => undefined}
       />
     ).toJSON();
 
