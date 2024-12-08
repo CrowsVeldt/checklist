@@ -12,7 +12,9 @@ export default function RequiredButton({
   const [active, setActive] = useState<boolean>(initialState);
   return (
     <Pressable
-      style={({pressed}) => pressed? [styles.required, styles.pressed] : styles.required}
+      style={({ pressed }) =>
+        pressed ? [styles.required, styles.pressed] : styles.required
+      }
       onPress={() => {
         setActive(!active);
         changeState(!active);
@@ -22,7 +24,6 @@ export default function RequiredButton({
         name="exclamationcircleo"
         size={24}
         color={active ? "black" : "whitesmoke"}
-        style={styles.checkmark}
       />
     </Pressable>
   );
@@ -35,9 +36,9 @@ const styles = StyleSheet.create({
     height: "100%",
     width: 50,
     borderStartColor: "black",
-    borderStartWidth: 1
+    borderStartWidth: 1,
   },
   pressed: {
-    backgroundColor: "lightgray"
-  }
+    backgroundColor: "lightgray",
+  },
 });
