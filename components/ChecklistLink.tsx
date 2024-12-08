@@ -38,12 +38,14 @@ export default function ChecklistLink({
               styles.link,
               styles.linkPressed,
               { height: linkHeight },
-              first ? styles.firstItem : last ? styles.lastItem : {},
+              first ? styles.firstItem : {},
+              last ? styles.lastItem : {},
             ]
           : [
               styles.link,
               { height: linkHeight },
-              first ? styles.firstItem : last ? styles.lastItem : {},
+              first ? styles.firstItem : {},
+              last ? styles.lastItem : {},
             ]
       }
     >
