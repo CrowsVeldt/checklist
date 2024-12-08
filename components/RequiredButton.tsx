@@ -1,6 +1,7 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { RotateInUpLeft } from "react-native-reanimated";
 
 export default function RequiredButton({
   initialState,
@@ -12,7 +13,9 @@ export default function RequiredButton({
   const [active, setActive] = useState<boolean>(initialState);
   return (
     <Pressable
-      style={styles.required}
+      style={({ pressed }) =>
+        pressed ? [styles.required, styles.pressed] : styles.required
+      }
       onPress={() => {
         setActive(!active);
         changeState(!active);
@@ -20,11 +23,10 @@ export default function RequiredButton({
     >
       <AntDesign
         name="exclamationcircleo"
-        size={45}
-        color={active ? "black" : "white"}
-        style={styles.checkmark}
+        size={24}
+        color={active ? "black" : "gray"}
       />
-      <Text>Required?</Text>
+      {!active && <View style={styles.lineThrough} />}
     </Pressable>
   );
 }
@@ -34,9 +36,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
+    width: 50,
+    borderStartColor: "black",
+    borderStartWidth: 1,
   },
-  checkmark: {
+  pressed: {
+    backgroundColor: "lightgray",
+  },
+  lineThrough: {
     position: "absolute",
-    left: 10,
+    width: "100%",
+    borderColor: "gray",
+    borderWidth: 1,
+    transform: [{rotate: "45deg"}]
   },
 });

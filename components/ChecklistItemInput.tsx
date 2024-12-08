@@ -1,7 +1,7 @@
-import { AntDesign } from "@expo/vector-icons";
 import { useEffect, useRef, useState } from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import RequiredButton from "./RequiredButton";
+import DeleteEntryButton from "./DeleteEntryButton";
 
 export default function ChecklistItemInput({
   id,
@@ -49,19 +49,9 @@ export default function ChecklistItemInput({
       }}
     >
       <TextInput value={title} onChangeText={setTitle} ref={inputRef} />
-      <View style={styles.controlWrapper}>
+      <View style={styles.buttonWrapper}>
         <RequiredButton initialState={required} changeState={setRequired} />
-
-        <Pressable
-          style={({ pressed }) =>
-            pressed
-              ? [styles.deleteEntryButton, styles.buttonPressed]
-              : styles.deleteEntryButton
-          }
-          onPress={remove}
-        >
-          <AntDesign name="delete" size={24} color="black" />
-        </Pressable>
+        <DeleteEntryButton remove={remove} />
       </View>
     </Pressable>
   );
@@ -85,20 +75,10 @@ const styles = StyleSheet.create({
     borderBottomStartRadius: 10,
     borderBottomEndRadius: 10,
   },
-  controlWrapper: {
+  buttonWrapper: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: 120,
     height: "100%",
-  },
-  buttonPressed: {
-    backgroundColor: "lightgray",
-  },
-  deleteEntryButton: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-    width: 50,
   },
 });
