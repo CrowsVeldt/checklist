@@ -1,7 +1,6 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { RotateInUpLeft } from "react-native-reanimated";
 
 export default function RequiredButton({
   initialState,

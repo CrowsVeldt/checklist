@@ -119,12 +119,31 @@ export default function CreateChecklist() {
           <Pressable
             style={({ pressed }) =>
               pressed
-                ? [styles.createButton, styles.buttonPressed]
-                : styles.createButton
+                ? [
+                    styles.createButton,
+                    entries.length > 0
+                      ? styles.createButtonActive
+                      : styles.createButtonInactive,
+                    entries.length > 0 ? styles.buttonPressed : {},
+                  ]
+                : [
+                    entries.length > 0
+                      ? styles.createButtonActive
+                      : styles.createButtonInactive,
+                    styles.createButton,
+                  ]
             }
-            onPress={() => setModalVisible(true)}
+            onPress={() => (entries.length > 0 ? setModalVisible(true) : null)}
           >
-            <Text style={styles.createButtonText}>Create</Text>
+            <Text
+              style={
+                entries.length > 0
+                  ? styles.createButtonText
+                  : [styles.createButtonText, styles.createButtonTextInactive]
+              }
+            >
+              Create
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -145,16 +164,26 @@ const styles = StyleSheet.create({
     height: "70%",
   },
   createButton: {
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 10,
     padding: 20,
     width: 140,
+  },
+  createButtonActive: {
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "black",
+  },
+  createButtonInactive: {
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "gray",
   },
   createButtonText: {
     fontSize: 24,
     textAlign: "center",
     textAlignVertical: "center",
+  },
+  createButtonTextInactive: {
+    color: "gray",
   },
   buttonPressed: {
     backgroundColor: "lightgray",
