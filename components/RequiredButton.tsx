@@ -1,6 +1,7 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { RotateInUpLeft } from "react-native-reanimated";
 
 export default function RequiredButton({
   initialState,
@@ -23,8 +24,9 @@ export default function RequiredButton({
       <AntDesign
         name="exclamationcircleo"
         size={24}
-        color={active ? "black" : "whitesmoke"}
+        color={active ? "black" : "gray"}
       />
+      {!active && <View style={styles.lineThrough} />}
     </Pressable>
   );
 }
@@ -40,5 +42,12 @@ const styles = StyleSheet.create({
   },
   pressed: {
     backgroundColor: "lightgray",
+  },
+  lineThrough: {
+    position: "absolute",
+    width: "100%",
+    borderColor: "gray",
+    borderWidth: 1,
+    transform: [{rotate: "45deg"}]
   },
 });
