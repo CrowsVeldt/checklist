@@ -23,12 +23,13 @@
     - UI elements will scale in size to match device font scaling
     - When a checklist is complete (all required boxes have been checked) display "checklist complete"
     - Have an example checklist for first startup
+    - When trying to save an empty list an alert warns the user that isn't allowed
 
 # TODO:
 
-    - Make subEntry values work with ChecklistEntryInput and ChecklistEntry
-    - disable create/update checklist button for list without any items
     - give up on snapshot testing for now
+    - Make subEntry values work with ChecklistEntryInput and ChecklistEntry
+    - warn user when trying to save an empty list
     - update ui for modals
 
 # Bugs:
