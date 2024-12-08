@@ -60,7 +60,11 @@ export default function ChecklistItem({
         {required ? (
           <AntDesign name="exclamationcircleo" size={25} color="black" />
         ) : (
-          <AntDesign name="exclamationcircleo" size={25} color="white" />
+          <AntDesign
+            name="exclamationcircleo"
+            size={25}
+            color={checked ? "lightgray" : "whitesmoke"}
+          />
         )}
       </Pressable>
     </Animated.View>
