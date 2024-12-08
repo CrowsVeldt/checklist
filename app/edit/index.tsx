@@ -89,18 +89,38 @@ export default function EditChecklist() {
           <Pressable
             style={({ pressed }) =>
               pressed
-                ? [styles.updateButton, styles.buttonPressed]
-                : styles.updateButton
+                ? [
+                    entries.length > 0
+                      ? [styles.updateButtonActive, styles.buttonPressed]
+                      : styles.updateButtonInactive,
+                    styles.updateButton,
+                  ]
+                : [
+                    entries.length > 0
+                      ? styles.updateButtonActive
+                      : styles.updateButtonInactive,
+                    styles.updateButton,
+                  ]
             }
             onPress={() => {
-              updateList({ id, title, entries });
-              router.replace({
-                pathname: "/checklist/[checklist]",
-                params: { checklist: id },
-              });
+              if (entries.length > 0) {
+                updateList({ id, title, entries });
+                router.replace({
+                  pathname: "/checklist/[checklist]",
+                  params: { checklist: id },
+                });
+              }
             }}
           >
-            <Text style={styles.updateButtonText}>Update</Text>
+            <Text
+              style={
+                entries.length > 0
+                  ? styles.updateButtonText
+                  : [styles.updateButtonText, styles.updateButtonTextInactive]
+              }
+            >
+              Update
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -120,16 +140,26 @@ const styles = StyleSheet.create({
     height: "70%",
   },
   updateButton: {
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 10,
     padding: 20,
     width: 140,
+  },
+  updateButtonActive: {
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "black",
+  },
+  updateButtonInactive: {
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "gray",
   },
   updateButtonText: {
     fontSize: 24,
     textAlign: "center",
     textAlignVertical: "center",
+  },
+  updateButtonTextInactive: {
+    color: "gray",
   },
   buttonPressed: {
     backgroundColor: "gray",

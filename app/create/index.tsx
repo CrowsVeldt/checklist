@@ -120,11 +120,10 @@ export default function CreateChecklist() {
             style={({ pressed }) =>
               pressed
                 ? [
-                    styles.createButton,
                     entries.length > 0
-                      ? styles.createButtonActive
+                      ? [styles.createButtonActive, styles.buttonPressed]
                       : styles.createButtonInactive,
-                    entries.length > 0 ? styles.buttonPressed : {},
+                    styles.createButton,
                   ]
                 : [
                     entries.length > 0
