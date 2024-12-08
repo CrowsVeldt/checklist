@@ -87,13 +87,15 @@ export default function CreateChecklist() {
           <FlatList
             style={styles.list}
             data={entries}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <ChecklistItemInput
                 id={item.id}
                 initialTitle={item.title}
                 initialRequired={item.required}
                 onEntryChange={onEntryInputChange}
                 remove={() => removeEntry(item.id)}
+                first={index === 0}
+                last={index === entries.length - 1}
               />
             )}
             keyExtractor={(item) => item.id}
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   list: {
-    height: "70%"
+    height: "70%",
   },
   createButton: {
     borderWidth: 1,

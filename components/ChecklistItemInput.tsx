@@ -39,7 +39,8 @@ export default function ChecklistItemInput({
     <Pressable
       style={[
         styles.inputWrapper,
-        first ? styles.firstItem : last ? styles.lastItem : {},
+        first ? styles.firstItem : {},
+        last ? styles.lastItem : {},
       ]}
       onPress={() => {
         if (inputRef.current) {
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     height: 70,
-    marginBottom: 3
+    marginBottom: 3,
   },
   firstItem: {
     borderTopStartRadius: 10,
