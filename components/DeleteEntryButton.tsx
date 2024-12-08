@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: 50,
+    borderStartColor: "black",
+    borderStartWidth: 1
   },
   buttonPressed: {
     backgroundColor: "lightgray",

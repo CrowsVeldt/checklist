@@ -49,9 +49,8 @@ export default function ChecklistItemInput({
       }}
     >
       <TextInput value={title} onChangeText={setTitle} ref={inputRef} />
-      <View style={styles.controlWrapper}>
+      <View style={styles.buttonWrapper}>
         <RequiredButton initialState={required} changeState={setRequired} />
-
         <DeleteEntryButton remove={remove} />
       </View>
     </Pressable>
@@ -76,11 +75,10 @@ const styles = StyleSheet.create({
     borderBottomStartRadius: 10,
     borderBottomEndRadius: 10,
   },
-  controlWrapper: {
+  buttonWrapper: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: 120,
     height: "100%",
   },
 });

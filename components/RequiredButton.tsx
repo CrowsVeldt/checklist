@@ -12,7 +12,7 @@ export default function RequiredButton({
   const [active, setActive] = useState<boolean>(initialState);
   return (
     <Pressable
-      style={styles.required}
+      style={({pressed}) => pressed? [styles.required, styles.pressed] : styles.required}
       onPress={() => {
         setActive(!active);
         changeState(!active);
@@ -20,11 +20,10 @@ export default function RequiredButton({
     >
       <AntDesign
         name="exclamationcircleo"
-        size={45}
-        color={active ? "black" : "white"}
+        size={24}
+        color={active ? "black" : "whitesmoke"}
         style={styles.checkmark}
       />
-      <Text>Required?</Text>
     </Pressable>
   );
 }
@@ -34,9 +33,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
+    width: 50,
+    borderStartColor: "black",
+    borderStartWidth: 1
   },
-  checkmark: {
-    position: "absolute",
-    left: 10,
-  },
+  pressed: {
+    backgroundColor: "lightgray"
+  }
 });
