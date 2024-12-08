@@ -15,28 +15,7 @@ export const AppContext = createContext<AppContextType>(
 );
 
 const AppProvider = ({ children }: { children: any }) => {
-  const [lists, setLists] = useState<ChecklistType[]>([
-    {
-      id: "123abc",
-      title: "default checklist",
-      entries: [
-        {
-          id: "456def",
-          status: false,
-          title: "item 1",
-          required: true,
-          parentTo: [],
-        },
-        {
-          id: "789ghi",
-          status: false,
-          title: "item 2",
-          required: true,
-          parentTo: [],
-        },
-      ],
-    },
-  ]);
+  const [lists, setLists] = useState<ChecklistType[]>([]);
   const listKey = "listList";
 
   useEffect(() => {
@@ -45,6 +24,29 @@ const AppProvider = ({ children }: { children: any }) => {
         const savedListData = await retrieveData(listKey);
         if (savedListData != null) {
           setLists(savedListData);
+        } else {
+          setLists([
+            {
+              id: "123abc",
+              title: "Example checklist",
+              entries: [
+                {
+                  id: "456def",
+                  status: false,
+                  title: "item 1",
+                  required: true,
+                  parentTo: [],
+                },
+                {
+                  id: "789ghi",
+                  status: false,
+                  title: "item 2",
+                  required: true,
+                  parentTo: [],
+                },
+              ],
+            },
+          ]);
         }
       } catch (error) {
         console.warn("An error occurred when retrieving list data");
