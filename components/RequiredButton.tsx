@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   lineThrough: {
     position: "absolute",
-    width: "100%",
+    width: "48%",
     borderColor: "gray",
     borderWidth: 1,
     transform: [{rotate: "45deg"}]

@@ -34,14 +34,29 @@ exports[`<RequiredButton /> RequiredButton renders correctly 1`] = `
   style={
     {
       "alignItems": "center",
+      "borderStartColor": "black",
+      "borderStartWidth": 1,
       "height": "100%",
       "justifyContent": "center",
+      "width": 50,
     }
   }
 >
   <Text />
-  <Text>
-    Required?
-  </Text>
+  <View
+    style={
+      {
+        "borderColor": "gray",
+        "borderWidth": 1,
+        "position": "absolute",
+        "transform": [
+          {
+            "rotate": "45deg",
+          },
+        ],
+        "width": "100%",
+      }
+    }
+  />
 </View>
 `;

@@ -35,6 +35,7 @@ exports[`<AddEntryButton /> AddEntryButton renders correctly 1`] = `
     {
       "alignItems": "center",
       "borderColor": "black",
+      "borderRadius": 25,
       "borderWidth": 1,
       "height": 40,
       "justifyContent": "center",

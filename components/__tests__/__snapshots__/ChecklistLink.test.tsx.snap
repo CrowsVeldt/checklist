@@ -32,22 +32,27 @@ exports[`<ChecklistLink /> ChecklistLink renders correctly 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    {
-      "alignItems": "center",
-      "borderColor": "black",
-      "borderWidth": 1,
-      "flexDirection": "row",
-      "height": 50,
-      "justifyContent": "space-between",
-      "width": "100%",
-    }
+    [
+      {
+        "alignItems": "center",
+        "borderColor": "black",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      },
+      {
+        "height": 95.28571428571429,
+      },
+      {},
+      {},
+    ]
   }
 >
   <Text
     style={
       {
         "fontSize": 25,
-        "marginStart": 30,
+        "marginStart": 10,
       }
     }
   >
@@ -55,9 +60,15 @@ exports[`<ChecklistLink /> ChecklistLink renders correctly 1`] = `
   </Text>
   <View
     style={
-      {
-        "flexDirection": "row",
-      }
+      [
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+        },
+        {
+          "height": 95.28571428571429,
+        },
+      ]
     }
   >
     <View
@@ -91,14 +102,18 @@ exports[`<ChecklistLink /> ChecklistLink renders correctly 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        {
-          "alignItems": "center",
-          "borderColor": "black",
-          "borderWidth": 1,
-          "height": 50,
-          "justifyContent": "center",
-          "width": 50,
-        }
+        [
+          {
+            "alignItems": "center",
+            "borderStartColor": "black",
+            "borderStartWidth": 1,
+            "justifyContent": "center",
+          },
+          {
+            "height": 95.28571428571429,
+            "width": 95.28571428571429,
+          },
+        ]
       }
     >
       <Text />
@@ -134,14 +149,18 @@ exports[`<ChecklistLink /> ChecklistLink renders correctly 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        {
-          "alignItems": "center",
-          "borderColor": "black",
-          "borderWidth": 1,
-          "height": 50,
-          "justifyContent": "center",
-          "width": 50,
-        }
+        [
+          {
+            "alignItems": "center",
+            "borderStartColor": "black",
+            "borderStartWidth": 1,
+            "justifyContent": "center",
+          },
+          {
+            "height": 95.28571428571429,
+            "width": 95.28571428571429,
+          },
+        ]
       }
     >
       <Text />

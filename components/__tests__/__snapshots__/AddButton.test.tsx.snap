@@ -34,10 +34,12 @@ exports[`<AddButton /> AddButton renders correctly 1`] = `
   style={
     {
       "alignItems": "center",
+      "backgroundColor": "whitesmoke",
       "borderColor": "black",
-      "borderRadius": 5,
+      "borderRadius": 25,
       "borderWidth": 1,
       "bottom": 20,
+      "elevation": 5,
       "height": 50,
       "justifyContent": "center",
       "position": "absolute",

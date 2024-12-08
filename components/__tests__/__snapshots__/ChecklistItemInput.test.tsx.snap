@@ -32,15 +32,19 @@ exports[`<ChecklistItemInput /> ChecklistItemInput renders correctly 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    {
-      "alignItems": "center",
-      "borderColor": "black",
-      "borderRadius": 10,
-      "borderWidth": 1,
-      "flexDirection": "row",
-      "height": 70,
-      "justifyContent": "space-between",
-    }
+    [
+      {
+        "alignItems": "center",
+        "borderColor": "black",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "height": 70,
+        "justifyContent": "space-between",
+        "marginBottom": 3,
+      },
+      {},
+      {},
+    ]
   }
 >
   <TextInput
@@ -54,7 +58,6 @@ exports[`<ChecklistItemInput /> ChecklistItemInput renders correctly 1`] = `
         "flexDirection": "row",
         "height": "100%",
         "justifyContent": "space-between",
-        "width": 120,
       }
     }
   >
@@ -91,15 +94,30 @@ exports[`<ChecklistItemInput /> ChecklistItemInput renders correctly 1`] = `
       style={
         {
           "alignItems": "center",
+          "borderStartColor": "black",
+          "borderStartWidth": 1,
           "height": "100%",
           "justifyContent": "center",
+          "width": 50,
         }
       }
     >
       <Text />
-      <Text>
-        Required?
-      </Text>
+      <View
+        style={
+          {
+            "borderColor": "gray",
+            "borderWidth": 1,
+            "position": "absolute",
+            "transform": [
+              {
+                "rotate": "45deg",
+              },
+            ],
+            "width": "100%",
+          }
+        }
+      />
     </View>
     <View
       accessibilityState={
@@ -134,6 +152,8 @@ exports[`<ChecklistItemInput /> ChecklistItemInput renders correctly 1`] = `
       style={
         {
           "alignItems": "center",
+          "borderStartColor": "black",
+          "borderStartWidth": 1,
           "height": "100%",
           "justifyContent": "center",
           "width": 50,
