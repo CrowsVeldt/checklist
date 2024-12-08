@@ -77,7 +77,7 @@ export default function EditChecklist() {
                 {
                   id: randomUUID(),
                   status: false,
-                  title: "New item",
+                  title: `New item ${entries.length + 1}`,
                   required: false,
                   parentTo: [],
                 },

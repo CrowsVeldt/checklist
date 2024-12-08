@@ -18,7 +18,7 @@ import {
 
 export default function CreateChecklist() {
   const { addList }: ContextType<typeof AppContext> = useContext(AppContext);
-  const [title, setTitle] = useState<string>("Title");
+  const [title, setTitle] = useState<string>("New List");
   const [entries, setEntries] = useState<ChecklistEntryType[]>([
     {
       id: randomUUID(),
@@ -107,7 +107,7 @@ export default function CreateChecklist() {
                 {
                   id: randomUUID(),
                   status: false,
-                  title: "New item",
+                  title: `New item ${entries.length + 1}`,
                   required: false,
                   parentTo: [],
                 },

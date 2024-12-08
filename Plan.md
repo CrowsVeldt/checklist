@@ -29,6 +29,7 @@
     - Make subEntry values work with ChecklistEntryInput and ChecklistEntry
     - disable create/update checklist button for list without any items
     - give up on snapshot testing for now
+    - update ui for modals
 
 # Bugs:
 
