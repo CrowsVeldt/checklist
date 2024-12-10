@@ -28,6 +28,7 @@ export default function ChecklistItemInput({
   const [required, setRequired] = useState<boolean>(
     initialRequired != null ? initialRequired : false
   );
+  const [selection, setSelection] = useState({})
 
   const inputRef = useRef<TextInput>(null);
 
@@ -45,10 +46,16 @@ export default function ChecklistItemInput({
       onPress={() => {
         if (inputRef.current) {
           inputRef.current.focus();
+          setSelection({start: title.length, end: title.length})
         }
       }}
     >
-      <TextInput value={title} onChangeText={setTitle} ref={inputRef} />
+      <TextInput
+        value={title}
+        onChangeText={setTitle}
+        ref={inputRef}
+        selection={selection}
+      />
       <View style={styles.buttonWrapper}>
         <RequiredButton initialState={required} changeState={setRequired} />
         <DeleteEntryButton remove={remove} />
