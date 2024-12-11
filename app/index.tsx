@@ -26,11 +26,7 @@ export default function Index() {
 
   return (
     <SafeAreaView style={styles.mainView}>
-      <Modal
-        visible={modalVisible}
-        animationType="fade"
-        onRequestClose={() => {}}
-      >
+      <Modal visible={modalVisible} animationType="fade">
         <View style={styles.modalContentsContainer}>
           <Text
             style={styles.modalTitle}
