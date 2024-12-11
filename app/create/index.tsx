@@ -4,8 +4,8 @@ import TitleInput from "@/components/TitleInput";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistEntryType } from "@/utils/types";
 import { randomUUID } from "expo-crypto";
-import { router } from "expo-router";
-import { ContextType, useContext, useState } from "react";
+import { router, useNavigation } from "expo-router";
+import { ContextType, useContext, useEffect, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -29,6 +29,7 @@ export default function CreateChecklist() {
     },
   ]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [abandon, setAbandon] = useState<boolean>(false);
   const id: string = randomUUID();
 
   const removeEntry: (id: string) => void = (id) => {
@@ -53,32 +54,47 @@ export default function CreateChecklist() {
     );
   };
 
+  const navigation = useNavigation();
+  useEffect(() => {
+    navigation.addListener("beforeRemove", (e) => {
+      if (e.data.action.type === "POP") {
+        e.preventDefault();
+        setModalVisible(true);
+        if (abandon) {
+          navigation.dispatch(e.data.action);
+        }
+        return () => {
+          navigation.removeListener("beforeRemove", (e) => {});
+        };
+      }
+    });
+  }, [abandon]);
+
   return (
     <SafeAreaView style={styles.page}>
-      <Modal visible={modalVisible} style={styles.modal} animationType="fade">
-        <Text>Are you done creating this list?</Text>
-        <View style={styles.modalButtonContainer}>
-          <Pressable
-            style={[styles.modalButton, styles.modalConfirmButton]}
-            onPress={() => {
-              addList({ id, title, entries });
-              router.replace({
-                pathname: "/checklist/[checklist]",
-                params: { checklist: id },
-              });
-              setModalVisible(false);
-            }}
-          >
-            <Text style={styles.modalButtonText}>Yes</Text>
-          </Pressable>
-          <Pressable
-            style={[styles.modalButton]}
-            onPress={() => {
-              setModalVisible(false);
-            }}
-          >
-            <Text style={styles.modalButtonText}>No</Text>
-          </Pressable>
+      <Modal visible={modalVisible} animationType="fade">
+        <View style={styles.modalContentContainer}>
+          <Text style={styles.modalTitle}>{`Warning!`}</Text>
+          <Text style={styles.modalSubTitle}>{`All changes will be lost`}</Text>
+          <View style={styles.modalButtonContainer}>
+            <Pressable
+              style={[styles.modalButton, styles.modalConfirmButton]}
+              onPress={() => {
+                setAbandon(true);
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.modalButtonText}>OK</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.modalButton]}
+              onPress={() => {
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.modalButtonText}>Oops, never mind</Text>
+            </Pressable>
+          </View>
         </View>
       </Modal>
       <View style={styles.formContainer}>
@@ -132,7 +148,13 @@ export default function CreateChecklist() {
                     styles.createButton,
                   ]
             }
-            onPress={() => (entries.length > 0 ? setModalVisible(true) : null)}
+            onPress={() => {
+              addList({ id, title, entries });
+              router.replace({
+                pathname: "/checklist/[checklist]",
+                params: { checklist: id },
+              });
+            }}
           >
             <Text
               style={
@@ -187,9 +209,18 @@ const styles = StyleSheet.create({
   buttonPressed: {
     backgroundColor: "lightgray",
   },
-  modal: {
-    height: 200,
-    width: 200,
+  modalContentContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalTitle: {
+    fontSize: 25,
+    marginBottom: 30,
+  },
+  modalSubTitle: {
+    fontSize: 15,
+    marginBottom: 30,
   },
   modalButton: {
     borderColor: "black",
@@ -210,5 +241,6 @@ const styles = StyleSheet.create({
   modalButtonContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
+    width: "60%",
   },
 });
