@@ -26,27 +26,36 @@ export default function Index() {
 
   return (
     <SafeAreaView style={styles.mainView}>
-      <Modal visible={modalVisible} style={styles.modal} animationType="fade">
-        <Text>Are you sure you want to delete the list?</Text>
-        <View style={styles.modalButtonContainer}>
-          <Pressable
-            style={[styles.modalButton, styles.modalConfirmDeletion]}
-            onPress={() => {
-              removeList(modalTarget!);
-              setModalVisible(false);
-            }}
-          >
-            <Text style={styles.modalButtonText}>Yes</Text>
-          </Pressable>
-          <Pressable
-            style={[styles.modalButton]}
-            onPress={() => {
-              setModalTarget(undefined);
-              setModalVisible(false);
-            }}
-          >
-            <Text style={styles.modalButtonText}>No</Text>
-          </Pressable>
+      <Modal
+        visible={modalVisible}
+        animationType="fade"
+        onRequestClose={() => {}}
+      >
+        <View style={styles.modalContentsContainer}>
+          <Text
+            style={styles.modalTitle}
+          >{`Delete ${modalTarget?.title}?`}</Text>
+          <Text style={styles.modalSubTitle}>{`(This cannot be undone)`}</Text>
+          <View style={styles.modalButtonContainer}>
+            <Pressable
+              style={[styles.modalButton, styles.modalConfirmDeletion]}
+              onPress={() => {
+                removeList(modalTarget!);
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.modalButtonText}>Yes</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.modalButton]}
+              onPress={() => {
+                setModalTarget(undefined);
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.modalButtonText}>No</Text>
+            </Pressable>
+          </View>
         </View>
       </Modal>
       <View style={styles.listContainer}>
@@ -79,9 +88,18 @@ const styles = StyleSheet.create({
   listContainer: {
     width: "90%",
   },
-  modal: {
-    height: 200,
-    width: 200,
+  modalContentsContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalTitle: {
+    fontSize: 25,
+    marginBottom: 30,
+  },
+  modalSubTitle: {
+    fontSize: 15,
+    marginBottom: 30,
   },
   modalButton: {
     borderColor: "black",
