@@ -4,10 +4,11 @@ import TitleInput from "@/components/TitleInput";
 import { AppContext } from "@/context/AppContext";
 import { ChecklistEntryType, ChecklistType } from "@/utils/types";
 import { randomUUID } from "expo-crypto";
-import { router, useLocalSearchParams } from "expo-router";
-import { ContextType, useContext, useState } from "react";
+import { router, useLocalSearchParams, useNavigation } from "expo-router";
+import { ContextType, useContext, useEffect, useState } from "react";
 import {
   FlatList,
+  Modal,
   Pressable,
   SafeAreaView,
   StyleSheet,
@@ -26,6 +27,9 @@ export default function EditChecklist() {
   const [entries, setEntries] = useState<ChecklistEntryType[]>(
     list != undefined ? list.entries : []
   );
+
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [abandon, setAbandon] = useState<boolean>(false);
 
   const removeEntry: (id: string) => void = (id) => {
     const index = entries.findIndex((item) => item.id === id);
@@ -49,8 +53,49 @@ export default function EditChecklist() {
     );
   };
 
+  const navigation = useNavigation();
+  useEffect(() => {
+    navigation.addListener("beforeRemove", (e) => {
+      if (e.data.action.type === "POP") {
+        e.preventDefault();
+        setModalVisible(true);
+        if (abandon) {
+          navigation.dispatch(e.data.action);
+        }
+        return () => {
+          navigation.removeListener("beforeRemove", (e) => {});
+        };
+      }
+    });
+  }, [abandon]);
+
   return (
     <SafeAreaView style={styles.page}>
+      <Modal visible={modalVisible} animationType="fade">
+        <View style={styles.modalContentContainer}>
+          <Text style={styles.modalTitle}>{`Warning!`}</Text>
+          <Text style={styles.modalSubTitle}>{`All changes will be lost`}</Text>
+          <View style={styles.modalButtonContainer}>
+            <Pressable
+              style={[styles.modalButton, styles.modalConfirmButton]}
+              onPress={() => {
+                setAbandon(true);
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.modalButtonText}>OK</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.modalButton]}
+              onPress={() => {
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.modalButtonText}>Oops, never mind</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.formContainer}>
         <TitleInput title={title} setTitle={setTitle} />
         <View>
@@ -163,5 +208,39 @@ const styles = StyleSheet.create({
   },
   buttonPressed: {
     backgroundColor: "gray",
+  },
+  modalContentContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalTitle: {
+    fontSize: 25,
+    marginBottom: 30,
+  },
+  modalSubTitle: {
+    fontSize: 15,
+    marginBottom: 30,
+  },
+  modalButton: {
+    borderColor: "black",
+    borderWidth: 1,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 100,
+    height: 40,
+  },
+  modalButtonText: {
+    textAlign: "center",
+    textAlignVertical: "center",
+  },
+  modalConfirmButton: {
+    backgroundColor: "green",
+  },
+  modalButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: "60%",
   },
 });
