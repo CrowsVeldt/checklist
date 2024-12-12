@@ -17,6 +17,7 @@ import {
 } from "react-native";
 
 export default function CreateChecklist() {
+
   const { addList }: ContextType<typeof AppContext> = useContext(AppContext);
   const [title, setTitle] = useState<string>("New List");
   const [entries, setEntries] = useState<ChecklistEntryType[]>([

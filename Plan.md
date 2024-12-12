@@ -24,13 +24,14 @@
 
 # TODO:
 
+    - when a checklist is finished offer to either reset the list to empty, or continue as is
+
     - update ui for modals
     - give up on snapshot testing for now
     - Make subEntry values work with ChecklistEntryInput and ChecklistEntry
     - make finishing a checklist flashy and cool
-    - when a checklist is finished offer to either reset the list to empty, or continue as is
     - prevent making multiple lists with the same title?
-    - refactor create/edit screens so that they both inherit from the same component to reduce duplicate code
+    - refactor create/edit screens so that they both inherit from the same component to reduce duplicate code?
 
 # Bugs:
 

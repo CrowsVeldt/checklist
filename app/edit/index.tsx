@@ -17,10 +17,12 @@ import {
 } from "react-native";
 
 export default function EditChecklist() {
+
   const { getListById, updateList }: ContextType<typeof AppContext> =
     useContext(AppContext);
   const { id }: { id: string } = useLocalSearchParams();
   const list: ChecklistType | undefined = getListById(id);
+
   const [title, setTitle] = useState<string>(
     list != undefined ? list.title : ""
   );
